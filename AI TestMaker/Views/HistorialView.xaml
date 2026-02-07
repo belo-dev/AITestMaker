@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="AI_TestMaker.Views.HistorialView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#0B1020">
+
+    <UserControl.Resources>
+
+        <!-- Colores base -->
+        <SolidColorBrush x:Key="PrimaryBackground" Color="#0B1020"/>
+        <SolidColorBrush x:Key="SecondaryBackground" Color="#141B2F"/>
+        <SolidColorBrush x:Key="AccentBlue" Color="#3A7BD5"/>
+        <SolidColorBrush x:Key="AccentBlueLight" Color="#5FA8FF"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#B0C4DE"/>
+
+        <!-- Estilo para botones -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="180"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="4"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AccentBlueLight}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Estilo para ListView -->
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBlue}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryBackground}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBlue}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        </Style>
+
+        <Style TargetType="ListViewItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1A3A7BD5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource PrimaryBackground}" Margin="40">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <!-- Buscador -->
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="Historial de Tests"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   Foreground="{StaticResource AccentBlueLight}"
+                   Margin="0 0 0 20"
+                   HorizontalAlignment="Center"/>
+
+        <!-- Lista de tests -->
+        <Border Grid.Row="2"
+                Background="{StaticResource SecondaryBackground}"
+                CornerRadius="12"
+                Padding="20">
+            <ListView x:Name="ListaTests"
+                      MouseDoubleClick="ListaTests_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Dificultad" Width="120" DisplayMemberBinding="{Binding Dificultad}"/>
+                        <GridViewColumn Header="Tema" Width="200" DisplayMemberBinding="{Binding Tema}"/>
+                        <!-- NUEVA -->
+                        <GridViewColumn Header="Fecha" Width="180" DisplayMemberBinding="{Binding Fecha}"/>
+                        <GridViewColumn Header="Nota" Width="80" DisplayMemberBinding="{Binding Nota}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+        
+        <!-- BUSCADOR POR TEMA -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left">
+            <TextBlock Text="Buscar por tema: "
+                       FontSize="21"
+                       Foreground="White"
+                       Margin="0 0 0 0"/>
+            <TextBox x:Name="TxtBuscarTema"
+                     Width="300"
+                     Height="35"
+                     FontSize="16"
+                     Padding="8"
+                     Background="#222"
+                     Foreground="White"
+                     BorderBrush="#555"
+                     BorderThickness="1"
+                     TextChanged="TxtBuscarTema_TextChanged"
+                     />
+
+        </StackPanel>
+        <!-- Botones -->
+        <StackPanel Grid.Row="4"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0 20 0 0">
+
+            <Button Content="Exportar a PDF"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Click="ExportarPDF_Click"/>
+
+            <Button Content="Borrar"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Margin="20 0 20 0"
+                    Click="BorrarTest_Click"/>
+
+            <Button Content="Volver al inicio"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Click="Volver_Click"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

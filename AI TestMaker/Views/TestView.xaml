@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="AI_TestMaker.Views.TestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#0B1020">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="TiempoVerde" Color="#4CAF50"/>
+        <SolidColorBrush x:Key="TiempoAmarillo" Color="#FFC107"/>
+        <SolidColorBrush x:Key="TiempoRojo" Color="#F44336"/>
+    </UserControl.Resources>
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Info del test -->
+            <RowDefinition Height="Auto"/>
+            <!-- Cronómetro -->
+            <RowDefinition Height="Auto"/>
+            <!-- Barra -->
+            <RowDefinition Height="*"/>
+            <!-- Preguntas -->
+            <RowDefinition Height="Auto"/>
+            <!-- Finalizar -->
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- INFORMACIÓN DEL TEST (IZQUIERDA) -->
+            <StackPanel Grid.Column="0">
+
+                <TextBlock Text="Información del Test"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   Margin="0 0 0 10"/>
+
+                <TextBlock Text="{Binding Test.Tema, StringFormat=Tema: {0}}"
+                   FontSize="16"
+                   Foreground="#B0C4DE"
+                   Margin="0 2"/>
+
+                <TextBlock Text="{Binding Test.Dificultad, StringFormat=Dificultad: {0}}"
+                   FontSize="16"
+                   Foreground="#B0C4DE"
+                   Margin="0 2"/>
+
+                <TextBlock Text="{Binding Test.Fecha, StringFormat=Fecha: {0:dd/MM/yyyy HH:mm}}"
+                   FontSize="16"
+                   Foreground="#B0C4DE"
+                   Margin="0 2"/>
+
+                <TextBlock Text="{Binding Test.TiempoMaximo, StringFormat=Tiempo máximo: {0}}"
+                   FontSize="16"
+                   Foreground="#B0C4DE"
+                   Margin="0 2"/>
+
+            </StackPanel>
+
+            <!-- CRONÓMETRO + PAUSA (DERECHA) -->
+            <StackPanel Grid.Column="1"
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                Margin="20,0,0,0">
+
+                <TextBlock x:Name="TxtCronometro"
+                   FontSize="26"
+                   Foreground="White"
+                   Margin="0,0,20,0"/>
+
+                <Button x:Name="BtnPausa"
+                Content="Pausar"
+                Width="120"
+                Height="35"
+                Click="BtnPausa_Click"/>
+            </StackPanel>
+
+        </Grid>
+
+        <!-- Barra de progreso -->
+        <ProgressBar x:Name="BarraTiempo"
+                     Grid.Row="2"
+                     Height="20"
+                     Minimum="0"
+                     Maximum="100"
+                     Foreground="{StaticResource TiempoVerde}"
+                     Margin="0,0,0,20"/>
+
+        <!-- Preguntas con scroll -->
+        <ScrollViewer Grid.Row="3"
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="0,20,0,20">
+            <StackPanel x:Name="PreguntasPanel"/>
+        </ScrollViewer>
+
+        <!-- Finalizar -->
+        <Button Grid.Row="4"
+                Content="Finalizar Test"
+                Width="200"
+                Height="40"
+                HorizontalAlignment="Center"
+                Click="Finalizar_Click"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AI TestMaker\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\ai testmaker\\ai testmaker\\aiquestiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\aiquestiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\ai testmaker\\ai testmaker\\views\\historialview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\historialview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\ai testmaker\\ai testmaker\\views\\historialview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\historialview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AIQuestionGenerator.cs",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AI TestMaker\\AI TestMaker\\AIQuestionGenerator.cs",
+              "RelativeDocumentMoniker": "AI TestMaker\\AIQuestionGenerator.cs",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AI TestMaker\\AI TestMaker\\AIQuestionGenerator.cs",
+              "RelativeToolTip": "AI TestMaker\\AIQuestionGenerator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-07T12:26:31.394Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HistorialView.xaml",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AI TestMaker\\AI TestMaker\\Views\\HistorialView.xaml",
+              "RelativeDocumentMoniker": "AI TestMaker\\Views\\HistorialView.xaml",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AI TestMaker\\AI TestMaker\\Views\\HistorialView.xaml",
+              "RelativeToolTip": "AI TestMaker\\Views\\HistorialView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-30T20:33:47.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HistorialView.xaml.cs",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AI TestMaker\\AI TestMaker\\Views\\HistorialView.xaml.cs",
+              "RelativeDocumentMoniker": "AI TestMaker\\Views\\HistorialView.xaml.cs",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AI TestMaker\\AI TestMaker\\Views\\HistorialView.xaml.cs",
+              "RelativeToolTip": "AI TestMaker\\Views\\HistorialView.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T20:33:46.481Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

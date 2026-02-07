@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="AI_TestMaker.Views.ResultadosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#0B1020">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="PrimaryBackground" Color="#0B1020"/>
+        <SolidColorBrush x:Key="SecondaryBackground" Color="#141B2F"/>
+        <SolidColorBrush x:Key="AccentBlue" Color="#3A7BD5"/>
+        <SolidColorBrush x:Key="AccentBlueLight" Color="#5FA8FF"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#B0C4DE"/>
+
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="180"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="4"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AccentBlueLight}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource PrimaryBackground}" Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="Resultados del Test"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   Foreground="{StaticResource AccentBlueLight}"
+                   Margin="0,0,0,20"
+                   HorizontalAlignment="Center" Cursor=""/>
+
+        <!-- Panel de resultados -->
+        <Border Grid.Row="1"
+                Background="{StaticResource SecondaryBackground}"
+                CornerRadius="12"
+                Padding="30">
+            <StackPanel x:Name="ResultadosPanel"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Width="400"
+                        Margin="12">
+
+                <TextBlock x:Name="TxtDificultad"
+                           FontSize="18"
+                           Foreground="{StaticResource TextPrimary}"
+                           TextAlignment="Center"/>
+
+                <TextBlock x:Name="TxtAciertos"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimary}"
+                           TextAlignment="Center"/>
+
+                <TextBlock x:Name="TxtFallos"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimary}"
+                           TextAlignment="Center"/>
+                <TextBlock x:Name="TxtTiempo"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimary}"
+                           TextAlignment="Center"/>
+
+                <TextBlock x:Name="TxtNota"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource AccentBlueLight}"
+                           TextAlignment="Center"
+                           Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Botones -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,20"
+                    >
+
+            <Button Content="Volver al inicio"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Click="VolverInicio_Click"
+                    Margin="0,10,50,0"
+                    HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
