@@ -88,3 +88,49 @@ D:\VisualStudio\Programación\C#\AI TestMaker\AI TestMaker\obj\Debug\net8.0-wind
 D:\VisualStudio\Programación\C#\AI TestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\HistorialView.baml
 D:\VisualStudio\Programación\C#\AI TestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\HistorialView.g.cs
 D:\VisualStudio\Programación\C#\AI TestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestM.523D4B00.Up2Date
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\AI TestMaker.exe
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\AI TestMaker.dll.config
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\AI TestMaker.deps.json
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\AI TestMaker.runtimeconfig.json
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\AI TestMaker.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\AI TestMaker.pdb
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\iTextSharp.LGPLv2.Core.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\SkiaSharp.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\System.Data.SQLite.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\osx\native\libSkiaSharp.dylib
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.csproj.AssemblyReference.cache
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\MainWindow.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\HistorialView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\InicioView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\PreguntaControl.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\ResultadosView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\TestView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\HistorialView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\InicioView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\PreguntaControl.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\ResultadosView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\TestView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\App.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker_MarkupCompile.cache
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.g.resources
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.GeneratedMSBuildEditorConfig.editorconfig
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.AssemblyInfoInputs.cache
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.AssemblyInfo.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.csproj.CoreCompileInputs.cache
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.sourcelink.json
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestM.523D4B00.Up2Date
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\refint\AI TestMaker.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.pdb
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.genruntimeconfig.cache
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\ref\AI TestMaker.dll

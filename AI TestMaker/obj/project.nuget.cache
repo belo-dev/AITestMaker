@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ReL1IvdSsE4=",
+  "dgSpecHash": "Y5QxBmgwjz4=",
   "success": true,
-  "projectFilePath": "D:\\VisualStudio\\Programación\\C#\\AI TestMaker\\AI TestMaker\\AI TestMaker.csproj",
+  "projectFilePath": "D:\\VisualStudio\\Programación\\C#\\AITestMaker\\AI TestMaker\\AI TestMaker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\itextsharp.lgplv2.core\\3.7.12\\itextsharp.lgplv2.core.3.7.12.nupkg.sha512",

@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-D:\VisualStudio\Programación\C#\AI TestMaker\AI TestMaker\obj\Debug\net8.0-windows\
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\
 AI_TestMaker
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\VisualStudio\Programación\C#\AI TestMaker\AI TestMaker\App.xaml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\App.xaml
 61305257013
 
-251967304692
+2595179435
 203-52221529
 MainWindow.xaml;Views\HistorialView.xaml;Views\InicioView.xaml;Views\PreguntaControl.xaml;Views\ResultadosView.xaml;Views\TestView.xaml;
 
