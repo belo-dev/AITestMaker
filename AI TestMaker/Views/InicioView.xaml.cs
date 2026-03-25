@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -35,6 +36,7 @@ namespace AI_TestMaker.Views
             string dificultad = ((ComboBoxItem)DifficultyComboBox.SelectedItem).Content.ToString();
             string agente = ((ComboBoxItem)IAComboBox.SelectedItem).Content.ToString();
             string tema = TemaTextBox.Text.Trim();
+
             if (string.IsNullOrEmpty(tema))
             {
                 MessageBox.Show("Por favor, ingresa un tema para el test.", "Error",
@@ -42,11 +44,24 @@ namespace AI_TestMaker.Views
                 return;
             }
 
-            // Guardar en historial
+            // Guardar historial
             TopicHistoryManager.AgregarTema(tema);
             CargarHistorial();
 
-            List<Pregunta> preguntas = await AIQuestionGenerator.GenerarPreguntasIA(tema, dificultad, agente);
+            // Mostrar pantalla de carga
+            var loading = new LoadingView();
+            OverlayRoot.Children.Add(loading);
+
+            List<Pregunta> preguntas = null;
+
+            try
+            {
+                preguntas = await AIQuestionGenerator.GenerarPreguntasIA(tema, dificultad, agente);
+            }
+            finally
+            {
+                loading.FadeOutAndRemove();
+            }
 
             TimeSpan tiempoMaximo = dificultad switch
             {
@@ -58,8 +73,14 @@ namespace AI_TestMaker.Views
 
             Test test = new Test(dificultad, preguntas, tiempoMaximo, tema);
 
-            ((MainWindow)Application.Current.MainWindow).Content =
-                new TestView(test);
+            // Transición suave hacia TestView
+            var fade = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(300));
+            fade.Completed += (s, e2) =>
+            {
+                ((MainWindow)Application.Current.MainWindow).Content = new TestView(test);
+            };
+
+            this.BeginAnimation(OpacityProperty, fade);
         }
 
         private void HistorialComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

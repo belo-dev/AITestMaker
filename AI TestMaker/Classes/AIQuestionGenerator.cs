@@ -2,13 +2,14 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 public static class AIQuestionGenerator
 {
     public static async Task<List<Pregunta>> GenerarPreguntasIA(
-        string tema, string dificultad, string agenteSeleccionado)
+            string tema, string dificultad, string agenteSeleccionado)
     {
         var agente = AgentManager.ObtenerAgente(agenteSeleccionado);
 
@@ -23,18 +24,71 @@ public static class AIQuestionGenerator
             _ => 20
         };
 
-        string prompt = CrearPrompt(tema, dificultad, cantidad);
+        int maxPorTanda = 5;
+        var preguntasAcumuladas = new List<Pregunta>();
+        var enunciadosPrevios = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-        string respuesta = await agente.ChatCompletion(prompt);
+        int restantes = cantidad;
 
-        return ParsearPreguntas(respuesta);
+        while (restantes > 0)
+        {
+            int cantidadTanda = Math.Min(restantes, maxPorTanda);
+
+            string prompt = CrearPromptConExclusiones(
+                tema, dificultad, cantidadTanda, preguntasAcumuladas
+            );
+
+            var respuesta = await AgentManager.EjecutarConFallback(agente.Nombre, prompt);
+
+            var nuevasPreguntas = ParsearPreguntas(respuesta);
+
+            foreach (var pregunta in nuevasPreguntas)
+            {
+                // Limpieza de numeración automática
+                pregunta.Enunciado = Regex.Replace(
+                    pregunta.Enunciado,
+                    @"^\s*\d+[\.\)\-]\s*",
+                    ""
+                );
+
+                if (!enunciadosPrevios.Contains(pregunta.Enunciado))
+                {
+                    preguntasAcumuladas.Add(pregunta);
+                    enunciadosPrevios.Add(pregunta.Enunciado);
+                }
+            }
+
+            restantes = cantidad - preguntasAcumuladas.Count;
+
+            if (nuevasPreguntas.Count == 0)
+                throw new Exception("No se pudieron generar suficientes preguntas únicas.");
+        }
+
+        // 🔥 Numeración final correcta
+        var listaFinal = preguntasAcumuladas.Take(cantidad).ToList();
+
+        for (int i = 0; i < listaFinal.Count; i++)
+            listaFinal[i].Numero = i + 1;
+
+        return listaFinal;
     }
 
-    public static string CrearPrompt(string tema, string dificultad, int cantidad)
+
+    private static string CrearPromptConExclusiones(string tema, string dificultad, int cantidad, List<Pregunta> preguntasPrevias)
     {
+        string exclusiones = "";
+        if (preguntasPrevias.Count > 0)
+        {
+            exclusiones = "NO repitas ni crees preguntas similares a las siguientes ya generadas:\n";
+            foreach (var p in preguntasPrevias)
+                exclusiones += $"- {p.Enunciado}\n";
+        }
+
         return $@"
 Genera EXACTAMENTE {cantidad} preguntas tipo test sobre el tema ""{tema}"".
 Nivel de dificultad: {dificultad}.
+
+{exclusiones}
 
 INSTRUCCIONES CRÍTICAS:
 - Devuelve ÚNICAMENTE JSON válido.
@@ -68,17 +122,41 @@ REQUISITOS:
 - El JSON debe ser válido y parseable sin errores.
 - No incluyas numeración en el enunciado.
 - No incluyas saltos de línea dentro de los textos.
-- Dentro de los valores de texto NO se permiten comillas dobles. Si necesitas comillas, usa comillas simples.
+- Dentro de los valores de texto NO se permiten comillas dobles. Usa comillas simples si es necesario.
 - NO incluyas caracteres especiales sin escapar.
 
 DEVUELVE SOLO EL JSON.
 ";
     }
 
+    // 🔥 Blindaje total: extrae solo el JSON válido
+    private static string ExtraerSoloJSON(string raw)
+    {
+        int first = raw.IndexOf('{');
+        int last = raw.LastIndexOf('}');
+
+        if (first == -1 || last == -1 || last <= first)
+            throw new Exception("La IA devolvió un formato no válido.");
+
+        string contenido = raw.Substring(first, last - first + 1);
+
+        // Si hay otro JSON después, eliminarlo
+        int next = raw.IndexOf('{', last + 1);
+        if (next != -1)
+            return contenido;
+
+        return contenido;
+    }
 
     private static List<Pregunta> ParsearPreguntas(string json)
     {
+        json = ExtraerSoloJSON(json);
         json = RepararJsonIA(json);
+
+        // Validación mínima
+        if (!json.Contains("\"preguntas\""))
+            throw new Exception("La IA no devolvió el campo 'preguntas'.");
+
         var root = JsonConvert.DeserializeObject<RootPreguntas>(json);
 
         if (root?.preguntas == null)
@@ -104,26 +182,32 @@ DEVUELVE SOLO EL JSON.
         if (string.IsNullOrWhiteSpace(json))
             return json;
 
-        // 1. Eliminar caracteres invisibles o raros
+        // 0. Eliminar comentarios y símbolos peligrosos
+        json = Regex.Replace(json, @"//.*?(?=\n|$)", ""); // comentarios //
+        json = Regex.Replace(json, @"/\*.*?\*/", "", RegexOptions.Singleline); // comentarios /* */
+        json = Regex.Replace(json, @"--?>", ""); // -->
+        json = Regex.Replace(json, @"=>", "");  // =>
+        json = Regex.Replace(json, @"->", "");  // ->
+        json = Regex.Replace(json, @"(?<![""'])>(?![""'])", ""); // > sueltos
+
+        // 1. Eliminar caracteres invisibles
         json = json.Replace("\r", "")
                    .Replace("\n", "")
                    .Replace("\t", "")
                    .Replace("\u00A0", " ")
                    .Replace("\u200B", "");
 
-        // 2. Asegurar que las claves están entre comillas
+        // 2. Asegurar claves entre comillas
         json = Regex.Replace(json, @"(?<={|,)\s*(\w+)\s*:", "\"$1\":");
 
-        // 3. Reemplazar comillas internas no escapadas dentro de strings
+        // 3. Reemplazar comillas internas por comillas simples
         json = Regex.Replace(json, "\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"", match =>
         {
             string contenido = match.Value;
 
-            // Saltar claves del JSON
             if (Regex.IsMatch(contenido, "^\"[a-zA-Z0-9_]+\":$"))
                 return contenido;
 
-            // Reemplazar comillas internas por comillas simples
             string limpio = contenido.Substring(1, contenido.Length - 2)
                                      .Replace("\"", "'");
 
@@ -133,7 +217,6 @@ DEVUELVE SOLO EL JSON.
         // 4. Arreglar objetos truncados
         int openBraces = json.Count(c => c == '{');
         int closeBraces = json.Count(c => c == '}');
-
         while (closeBraces < openBraces)
         {
             json += "}";
@@ -143,12 +226,17 @@ DEVUELVE SOLO EL JSON.
         // 5. Arreglar arrays truncados
         int openBrackets = json.Count(c => c == '[');
         int closeBrackets = json.Count(c => c == ']');
-
         while (closeBrackets < openBrackets)
         {
             json += "]";
             closeBrackets++;
         }
+
+        // 6. Eliminar comas colgantes
+        json = Regex.Replace(json, @",\s*([}\]])", "$1");
+
+        // 7. Reemplazar null por string vacío
+        json = json.Replace(": null", ": \"\"");
 
         return json;
     }

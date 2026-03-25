@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Y5QxBmgwjz4=",
+  "dgSpecHash": "Gp/DxEwJs8Y=",
   "success": true,
   "projectFilePath": "D:\\VisualStudio\\Programación\\C#\\AITestMaker\\AI TestMaker\\AI TestMaker.csproj",
   "expectedPackageFiles": [
@@ -11,7 +11,8 @@
     "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\skiasharp.nativeassets.macos\\3.119.1\\skiasharp.nativeassets.macos.3.119.1.nupkg.sha512",
     "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\skiasharp.nativeassets.win32\\3.119.1\\skiasharp.nativeassets.win32.3.119.1.nupkg.sha512",
     "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.119\\stub.system.data.sqlite.core.netstandard.1.0.119.nupkg.sha512",
-    "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\system.data.sqlite.core\\1.0.119\\system.data.sqlite.core.1.0.119.nupkg.sha512"
+    "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\system.data.sqlite.core\\1.0.119\\system.data.sqlite.core.1.0.119.nupkg.sha512",
+    "C:\\Users\\Stress 0 Zone\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
   ],
   "logs": []
 }

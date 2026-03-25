@@ -134,3 +134,6 @@ D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windo
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.pdb
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.genruntimeconfig.cache
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\ref\AI TestMaker.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\LoadingView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\LoadingView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\WpfAnimatedGif.dll

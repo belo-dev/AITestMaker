@@ -6,7 +6,6 @@ namespace AI_TestMaker
 {
     public class Pregunta
     {
-        public static int contador = 1;
         public int Numero { get; set; }
         public string Enunciado { get; set; }
         public List<Opcion> Opciones { get; set; }
@@ -14,7 +13,6 @@ namespace AI_TestMaker
 
         public Pregunta(string enunciado, List<Opcion> opciones)
         {
-            Numero = contador++;
             Enunciado = enunciado;
             Opciones = opciones;
             RespuestaUsuario = null;

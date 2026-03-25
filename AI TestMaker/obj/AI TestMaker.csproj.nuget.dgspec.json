@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[1.0.119, )"
             },
+            "WpfAnimatedGif": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            },
             "iTextSharp.LGPLv2.Core": {
               "target": "Package",
               "version": "[3.7.12, )"

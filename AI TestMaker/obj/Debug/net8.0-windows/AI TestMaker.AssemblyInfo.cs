@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AI TestMaker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+adf7661307aabc8c93f3c04842ae272990aaa7c4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+262856a26ff3a3d0700252beb82e69491a8f68e5")]
 [assembly: System.Reflection.AssemblyProductAttribute("AI TestMaker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AI TestMaker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

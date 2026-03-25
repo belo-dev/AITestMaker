@@ -15,6 +15,8 @@ public static class AgentManager
 
         if (!string.IsNullOrWhiteSpace(groqKey))
             Agentes.Add(new GroqAgent(groqKey));
+
+        Agentes.Add(new LMStudioAgent());
     }
 
     public static IAgent ObtenerAgente(string nombre)
@@ -22,8 +24,30 @@ public static class AgentManager
         return Agentes.Find(a => a.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
     }
 
-    public static IAgent ObtenerPrimeroDisponible()
+    public static async Task<string> EjecutarConFallback(string nombreAgente, string prompt)
     {
-        return Agentes.Count > 0 ? Agentes[0] : null;
+        IAgent agente = ObtenerAgente(nombreAgente);
+
+        if (agente == null)
+            throw new Exception($"No existe el agente '{nombreAgente}'.");
+
+        try
+        {
+            // Intento principal
+            return await agente.ChatCompletion(prompt);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"⚠️ Error con {nombreAgente}: {ex.Message}");
+            Console.WriteLine("→ Intentando fallback con LMStudio...");
+
+            // Buscar LMStudio
+            var lm = ObtenerAgente("LMStudio");
+
+            if (lm == null)
+                throw new Exception("No se pudo usar el fallback porque LMStudio no está registrado.");
+
+            return await lm.ChatCompletion(prompt);
+        }
     }
 }

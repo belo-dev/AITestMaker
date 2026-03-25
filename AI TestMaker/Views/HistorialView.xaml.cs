@@ -47,6 +47,11 @@ namespace AI_TestMaker.Views
             if (ListaTests.SelectedItem is TestResumen resumen)
             {
                 var test = _db.CargarTest(resumen.Id);
+
+                for (int i = 0; i < test.Preguntas.Count; i++)
+                {
+                    test.Preguntas[i].Numero = i + 1;
+                }
                 ((MainWindow)Application.Current.MainWindow).Content = new TestView(test);
             }
         }

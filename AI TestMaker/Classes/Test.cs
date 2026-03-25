@@ -7,7 +7,7 @@ namespace AI_TestMaker
     public class Test
     {
         public string Dificultad { get; set; }
-        public string Tema { get; set; }   // ← NUEVO
+        public string Tema { get; set; }   
         public DateTime Fecha { get; set; }
         public List<Pregunta> Preguntas { get; set; }
 

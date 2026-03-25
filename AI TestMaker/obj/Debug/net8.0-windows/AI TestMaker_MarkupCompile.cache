@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\App.xaml
-61305257013
+71702023011
 
-2595179435
-203-52221529
-MainWindow.xaml;Views\HistorialView.xaml;Views\InicioView.xaml;Views\PreguntaControl.xaml;Views\ResultadosView.xaml;Views\TestView.xaml;
+25559173692
+204-1474853717
+MainWindow.xaml;Views\HistorialView.xaml;Views\InicioView.xaml;Views\LoadingView.xaml;Views\PreguntaControl.xaml;Views\ResultadosView.xaml;Views\TestView.xaml;
 
 False
 

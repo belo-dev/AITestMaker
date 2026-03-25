@@ -10,18 +10,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Sandy Loading.gif" />
     <None Remove="icon.png" />
     <None Remove="Images\icon.png" />
+    <None Remove="Views\Sandy Loading.gif" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.7.12" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Sandy Loading.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\icon.png" />
+    <Resource Include="Views\Sandy Loading.gif" />
   </ItemGroup>
 
   <ItemGroup>

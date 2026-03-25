@@ -65,10 +65,22 @@
             <Setter Property="Padding" Value="6"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
+
+                <!-- Hover -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#1A3A7BD5"/>
                 </Trigger>
+
+                <!-- Seleccionado -->
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#2A4A8F"/>
+                    <!-- Azul oscuro agradable -->
+                    <Setter Property="Foreground" Value="White"/>
+                    <!-- Texto legible -->
+                </Trigger>
+
             </Style.Triggers>
+
         </Style>
 
     </UserControl.Resources>
