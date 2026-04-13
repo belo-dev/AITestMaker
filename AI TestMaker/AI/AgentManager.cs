@@ -6,7 +6,7 @@ public static class AgentManager
 {
     public static List<IAgent> Agentes { get; } = new List<IAgent>();
 
-    public static void RegistrarAgentes(string deepseekKey, string groqKey)
+    public static void RegistrarAgentes(string deepseekKey, string groqKey, string geminiKey, string openrouterKey)
     {
         Agentes.Clear();
 
@@ -15,6 +15,12 @@ public static class AgentManager
 
         if (!string.IsNullOrWhiteSpace(groqKey))
             Agentes.Add(new GroqAgent(groqKey));
+
+        if (!string.IsNullOrWhiteSpace(geminiKey))
+            Agentes.Add(new GeminiAgent(geminiKey));
+
+        if (!string.IsNullOrWhiteSpace(openrouterKey))
+            Agentes.Add(new DeepSeekAgentOpenRouter(openrouterKey));
 
         Agentes.Add(new LMStudioAgent());
     }
@@ -49,5 +55,15 @@ public static class AgentManager
 
             return await lm.ChatCompletion(prompt);
         }
+    }
+    public static async Task<string> EjecutarSinFallback(string nombreAgente, string prompt)
+    {
+        IAgent agente = ObtenerAgente(nombreAgente);
+
+        if (agente == null)
+            throw new Exception($"No existe el agente '{nombreAgente}'.");
+
+        // Aquí NO hay fallback, si falla, falla.
+        return await agente.ChatCompletion(prompt);
     }
 }

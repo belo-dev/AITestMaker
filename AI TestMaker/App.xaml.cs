@@ -18,7 +18,9 @@ namespace AI_TestMaker
 
             AgentManager.RegistrarAgentes(
                 deepseekKey: "sk-1e4cb738e188489b9ea54872b667005f",
-                groqKey: "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"
+                groqKey: "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",
+                geminiKey: "AIzaSyCOtEsP3oaNbjhWIY3KsjgNwuctLsolzjo",
+                openrouterKey: "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"
             );
         }
     }

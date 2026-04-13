@@ -176,6 +176,8 @@
                                   Width="300">
                             <ComboBoxItem Content="DeepSeek"/>
                             <ComboBoxItem Content="Groq"/>
+                            <ComboBoxItem Content="Gemini"/>
+                            <ComboBoxItem Content="OpenRouter"/>
                             <ComboBoxItem Content="LMStudio"/>
                         </ComboBox>
 

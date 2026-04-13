@@ -1,20 +1,16 @@
 ﻿using AI_TestMaker;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
-public class DeepSeekAgent : IAgent
+public class DeepSeekAgentOpenRouter : IAgent
 {
     private readonly HttpClient _http = new HttpClient();
     private readonly string _apiKey;
 
-    //Solo funciona con el modelo "deepseek-chat" y no con "deepseek/deepseek-chat" como en OpenRouter, por eso lo hago aparte sin usar OpenRouter
-    public string Nombre => "DeepSeek";
+    public string Nombre => "OpenRouter";
 
-    //El problema es que no tiene freeTier
-    public DeepSeekAgent(string apiKey)
+    public DeepSeekAgentOpenRouter(string apiKey)
     {
         _apiKey = apiKey?.Trim() ?? throw new ArgumentNullException(nameof(apiKey));
     }
@@ -23,7 +19,7 @@ public class DeepSeekAgent : IAgent
     {
         var payload = new
         {
-            model = "deepseek-chat",
+            model = "deepseek/deepseek-chat",
             messages = new[]
             {
                 new { role = "user", content = prompt }
@@ -33,9 +29,14 @@ public class DeepSeekAgent : IAgent
         string json = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
 
         var request = new HttpRequestMessage(HttpMethod.Post,
-            "https://api.deepseek.com/v1/chat/completions");
+            "https://openrouter.ai/api/v1/chat/completions");
 
         request.Headers.Add("Authorization", $"Bearer {_apiKey}");
+
+        // ✔️ CORRECTO
+        request.Headers.Add("Referer", "https://belo-dev.site");
+        request.Headers.Add("X-Title", "AI_TestMaker");
+
         request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var response = await _http.SendAsync(request);

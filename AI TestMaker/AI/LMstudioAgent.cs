@@ -13,7 +13,7 @@ public class LMStudioAgent : IAgent
 
     public string Nombre => "LMStudio";
 
-    public LMStudioAgent(string endpoint = "http://localhost:1234/v1/chat/completions",
+    public LMStudioAgent(string endpoint = "https://ia.belo-dev.site/v1/chat/completions",
                          string model = "openai/gpt-oss-20b")
     {
         // Timeout ampliado

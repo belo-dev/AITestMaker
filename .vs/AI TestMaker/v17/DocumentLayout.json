@@ -1,20 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\ai\\lmstudioagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\ai\\lmstudioagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\historialview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\historialview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\historialview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\historialview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,49 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LMstudioAgent.cs",
-              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\AI\\LMstudioAgent.cs",
-              "RelativeDocumentMoniker": "AI TestMaker\\AI\\LMstudioAgent.cs",
-              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\AI\\LMstudioAgent.cs",
-              "RelativeToolTip": "AI TestMaker\\AI\\LMstudioAgent.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAA3wA8AAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T21:25:18.439Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HistorialView.xaml.cs",
-              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\HistorialView.xaml.cs",
-              "RelativeDocumentMoniker": "AI TestMaker\\Views\\HistorialView.xaml.cs",
-              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\HistorialView.xaml.cs",
-              "RelativeToolTip": "AI TestMaker\\Views\\HistorialView.xaml.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAA3wBEAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T20:08:08.64Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HistorialView.xaml",
-              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\HistorialView.xaml",
-              "RelativeDocumentMoniker": "AI TestMaker\\Views\\HistorialView.xaml",
-              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\HistorialView.xaml",
-              "RelativeToolTip": "AI TestMaker\\Views\\HistorialView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-03-25T20:08:04.837Z",
-              "EditorCaption": ""
             }
           ]
         }
