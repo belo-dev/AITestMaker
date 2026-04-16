@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using AI_TestMaker.Classes;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace AI_TestMaker.Views
@@ -12,6 +13,14 @@ namespace AI_TestMaker.Views
             InitializeComponent();
             _test = test;
             CargarResultados();
+
+            ZoomManager.ZoomChanged += OnZoomChanged;
+        }
+
+        private void OnZoomChanged(double zoom)
+        {
+            LocalZoom.ScaleX = zoom;
+            LocalZoom.ScaleY = zoom;
         }
 
         private void CargarResultados()

@@ -1,0 +1,34 @@
+﻿<Window x:Class="AI_TestMaker.Views.CambiarPassWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cambiar contraseña"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Width="350" Height="319"
+        Background="#141B2F">
+
+    <StackPanel Margin="20">
+
+        <TextBlock Text="Cambiar contraseña"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="#5FA8FF"
+                   Margin="0 0 0 20"/>
+
+        <TextBlock Text="Contraseña actual" Foreground="White"/>
+        <PasswordBox x:Name="TxtActual" Margin="0 0 0 10"/>
+
+        <TextBlock Text="Nueva contraseña" Foreground="White"/>
+        <PasswordBox x:Name="TxtNueva" Margin="0 0 0 10"/>
+
+        <TextBlock Text="Repetir nueva contraseña" Foreground="White"/>
+        <PasswordBox x:Name="TxtNueva2" Margin="0 0 0 20"/>
+
+        <Button Content="Guardar"
+                Height="35"
+                Background="#3A7BD5"
+                Foreground="White"
+                Click="Guardar_Click"/>
+
+    </StackPanel>
+</Window>

@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using AI_TestMaker.DB;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -22,6 +23,9 @@ namespace AI_TestMaker
                 geminiKey: "AIzaSyCOtEsP3oaNbjhWIY3KsjgNwuctLsolzjo",
                 openrouterKey: "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"
             );
+
+            var db = new DatabaseManager();
+            db.CrearTablas();
         }
     }
 

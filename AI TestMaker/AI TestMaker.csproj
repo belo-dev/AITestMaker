@@ -27,8 +27,10 @@
     <Resource Include="Assets\Sandy Loading.gif">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\icon.png" />
-    <Resource Include="Views\Sandy Loading.gif" />
+    <Resource Include="Images\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Sandy Loading.gif" />
   </ItemGroup>
 
   <ItemGroup>

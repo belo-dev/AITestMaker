@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="AI_TestMaker.Views.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#0B1020">
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+
+        <Border Background="#141B2F"
+                Padding="30"
+                CornerRadius="12"
+                Width="420">
+
+            <StackPanel>
+
+                <!-- TÍTULO -->
+                <TextBlock Text="Mi perfil"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Foreground="#5FA8FF"
+                           HorizontalAlignment="Center"
+                           Margin="0 0 0 25"/>
+
+                <!-- BANNER MODO INVITADO -->
+                <Border x:Name="BannerInvitado"
+                        Background="#332E5A"
+                        CornerRadius="8"
+                        Padding="12"
+                        Margin="0 0 0 20"
+                        Visibility="Collapsed">
+                    <TextBlock Text="Estás en modo invitado. Tus tests no se guardan y algunas funciones están limitadas."
+                               Foreground="#FFD27F"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <!-- DATOS DEL USUARIO -->
+                <StackPanel Margin="0 0 0 25">
+
+                    <TextBlock Text="Usuario"
+                               Foreground="#B0C4DE"
+                               Margin="0 0 0 4"/>
+                    <TextBlock x:Name="TxtUsername"
+                               Foreground="White"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Margin="0 0 0 12"/>
+
+                    <TextBlock Text="Estado"
+                               Foreground="#B0C4DE"
+                               Margin="0 0 0 4"/>
+                    <TextBlock x:Name="TxtEstado"
+                               Foreground="White"
+                               Margin="0 0 0 12"/>
+
+                    <TextBlock Text="Tests realizados"
+                               Foreground="#B0C4DE"
+                               Margin="0 0 0 4"/>
+                    <TextBlock x:Name="TxtTestsRealizados"
+                               Foreground="White"
+                               Margin="0 0 0 12"/>
+
+                    <TextBlock Text="Último test"
+                               Foreground="#B0C4DE"
+                               Margin="0 0 0 4"/>
+                    <TextBlock x:Name="TxtUltimoTest"
+                               Foreground="White"
+                               Margin="0 0 0 12"/>
+
+                </StackPanel>
+
+                <!-- BOTONES DE ACCIÓN -->
+                <StackPanel>
+
+                    <!-- Cambiar contraseña -->
+                    <Button x:Name="BtnCambiarPass"
+                            Content="Cambiar contraseña"
+                            Height="38"
+                            Background="#3A7BD5"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Margin="0 0 0 10"
+                            Visibility="Collapsed"
+                            Click="CambiarPass_Click"/>
+
+                    <!-- Eliminar cuenta -->
+                    <Button x:Name="BtnEliminarCuenta"
+                            Content="Eliminar cuenta"
+                            Height="38"
+                            Background="#AA3333"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Margin="0 0 0 20"
+                            Visibility="Collapsed"
+                            Click="EliminarCuenta_Click"/>
+
+                    <!-- Crear cuenta (solo invitado) -->
+                    <Button x:Name="BtnCrearCuenta"
+                            Content="Crear cuenta"
+                            Height="38"
+                            Background="#5FA8FF"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Margin="0 0 0 20"
+                            Visibility="Collapsed"
+                            Click="CrearCuenta_Click"/>
+
+                    <!-- Navegación -->
+                    <Button Content="Ir al inicio"
+                            Height="38"
+                            Background="#3A7BD5"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Margin="0 0 0 8"
+                            Click="IrInicio_Click"/>
+
+                    <Button Content="Ver historial"
+                            Height="38"
+                            Background="#5FA8FF"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Margin="0 0 0 8"
+                            Click="VerHistorial_Click"/>
+
+                    <Button Content="Cerrar sesión"
+                            Height="38"
+                            Background="#AA3333"
+                            Foreground="White"
+                            FontWeight="SemiBold"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Margin="0 10 0 0"
+                            Click="CerrarSesion_Click"/>
+
+                </StackPanel>
+
+            </StackPanel>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>

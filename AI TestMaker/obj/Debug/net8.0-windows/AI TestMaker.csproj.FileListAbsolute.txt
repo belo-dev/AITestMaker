@@ -108,13 +108,11 @@ D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windo
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker.csproj.AssemblyReference.cache
-D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\MainWindow.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\HistorialView.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\InicioView.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\PreguntaControl.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\ResultadosView.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\TestView.baml
-D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\MainWindow.g.cs
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\HistorialView.g.cs
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\InicioView.g.cs
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\PreguntaControl.g.cs
@@ -137,3 +135,13 @@ D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windo
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\LoadingView.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\LoadingView.g.cs
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Debug\net8.0-windows\WpfAnimatedGif.dll
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\MainWindow.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\LoginView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\RegisterView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\LoginView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\RegisterView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\CambiarPassWindow.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\ProfileView.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\CambiarPassWindow.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\ProfileView.g.cs

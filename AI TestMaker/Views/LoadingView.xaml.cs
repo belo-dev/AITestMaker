@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AI_TestMaker.DB.Login;
+using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
@@ -22,5 +24,6 @@ namespace AI_TestMaker.Views
 
             this.BeginAnimation(OpacityProperty, anim);
         }
+
     }
 }

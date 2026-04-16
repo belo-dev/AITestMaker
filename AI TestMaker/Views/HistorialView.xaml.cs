@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AI_TestMaker.Classes;
+using AI_TestMaker.DB;
+using AI_TestMaker.DB.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -14,8 +17,22 @@ namespace AI_TestMaker.Views
         public HistorialView()
         {
             InitializeComponent();
+            if (Session.IsGuest)
+            {
+                MessageBox.Show("El historial está disponible solo para usuarios registrados.");
+                ((MainWindow)Application.Current.MainWindow).Content = new InicioView();
+                return;
+            }
             _db = new DatabaseManager();
             CargarHistorial();
+
+            ZoomManager.ZoomChanged += OnZoomChanged;
+        }
+
+        private void OnZoomChanged(double zoom)
+        {
+            LocalZoom.ScaleX = zoom;
+            LocalZoom.ScaleY = zoom;
         }
 
         private void CargarHistorial()
@@ -67,19 +84,34 @@ namespace AI_TestMaker.Views
             var item = (TestResumen)ListaTests.SelectedItem;
             var test = _db.CargarTest(item.Id);
 
+            // Preguntar al usuario si quiere incluir soluciones
+            var result = MessageBox.Show(
+                "¿Quieres incluir las soluciones en el PDF?",
+                "Exportar test",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Cancel)
+                return;
+
+            bool incluirSoluciones = (result == MessageBoxResult.Yes);
+
             var dialog = new Microsoft.Win32.SaveFileDialog
             {
-                Title = "Guardar test como PDF",
+                Title = incluirSoluciones ? "Guardar test con soluciones" : "Guardar test sin soluciones",
                 Filter = "Archivo PDF (*.pdf)|*.pdf",
-                FileName = $"Test_{item.Id}.pdf"
+                FileName = incluirSoluciones
+                    ? $"Test_{item.Id}.pdf"
+                    : $"Test_{item.Id}_SinSoluciones.pdf"
             };
 
             if (dialog.ShowDialog() == true)
             {
-                PDFExporter.ExportarTest(test, dialog.FileName);
+                PDFExporter.ExportarTest(test, dialog.FileName, incluirSoluciones);
                 MessageBox.Show("PDF exportado correctamente.");
             }
         }
+
 
         private void BorrarTest_Click(object sender, RoutedEventArgs e)
         {

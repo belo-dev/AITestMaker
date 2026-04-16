@@ -8,7 +8,7 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
             <!-- GIF de carga -->
-            <Image gif:ImageBehavior.AnimatedSource="/Views/Sandy Loading.gif"
+            <Image gif:ImageBehavior.AnimatedSource="/Images/Sandy Loading.gif"
                     Width="220"
                     Height="220"/>
 

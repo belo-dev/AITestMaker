@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AI_TestMaker.DB.Login;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 
-namespace AI_TestMaker
+namespace AI_TestMaker.DB
 {
     public class DatabaseManager
     {
@@ -19,20 +20,32 @@ namespace AI_TestMaker
                 CrearTablas();
         }
 
-        private void CrearTablas()
+        public void CrearTablas()
         {
             using var conn = new SQLiteConnection(_connectionString);
             conn.Open();
 
+            string sqlUsers = @"
+                CREATE TABLE IF NOT EXISTS Users (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Username TEXT UNIQUE NOT NULL,
+                    PasswordHash TEXT NOT NULL,
+                    Salt TEXT NOT NULL,
+                    FechaRegistro TEXT NOT NULL
+                );
+            ";
+
             string sqlTest = @"
                 CREATE TABLE IF NOT EXISTS Test (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    UserId INTEGER NOT NULL,
                     Dificultad TEXT,
                     Tema TEXT,
                     Fecha TEXT,
                     TiempoMaximo INTEGER,
                     TiempoEmpleado INTEGER,
-                    Nota REAL
+                    Nota REAL,
+                    FOREIGN KEY(UserId) REFERENCES Users(Id)
                 );
             ";
 
@@ -56,7 +69,10 @@ namespace AI_TestMaker
                 );
             ";
 
-            using var cmd = new SQLiteCommand(sqlTest, conn);
+            using var cmd = new SQLiteCommand(sqlUsers, conn);
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = sqlTest;
             cmd.ExecuteNonQuery();
 
             cmd.CommandText = sqlPregunta;
@@ -66,23 +82,23 @@ namespace AI_TestMaker
             cmd.ExecuteNonQuery();
         }
 
-        // -------------------------------------------------------------
-        // GUARDAR TEST COMPLETO
-        // -------------------------------------------------------------
         public int GuardarTest(Test test)
         {
+            if (Session.IsGuest)
+                return -1;
             using var conn = new SQLiteConnection(_connectionString);
             conn.Open();
 
             using var transaction = conn.BeginTransaction();
 
             string sqlInsertTest = @"
-                INSERT INTO Test (Dificultad, Tema, Fecha, TiempoMaximo, TiempoEmpleado, Nota)
-                VALUES (@dif, @tema, @fecha, @tmax, @temp, @nota);
+                INSERT INTO Test (UserId, Dificultad, Tema, Fecha, TiempoMaximo, TiempoEmpleado, Nota)
+                VALUES (@uid, @dif, @tema, @fecha, @tmax, @temp, @nota);
                 SELECT last_insert_rowid();
             ";
 
             using var cmdTest = new SQLiteCommand(sqlInsertTest, conn);
+            cmdTest.Parameters.AddWithValue("@uid", Session.UserId);
             cmdTest.Parameters.AddWithValue("@dif", test.Dificultad);
             cmdTest.Parameters.AddWithValue("@tema", test.Tema);
             cmdTest.Parameters.AddWithValue("@fecha", test.Fecha.ToString("s"));
@@ -92,7 +108,6 @@ namespace AI_TestMaker
 
             int testId = Convert.ToInt32(cmdTest.ExecuteScalar());
 
-            // Insertar Preguntas
             foreach (var p in test.Preguntas)
             {
                 string sqlInsertPregunta = @"
@@ -108,7 +123,6 @@ namespace AI_TestMaker
 
                 int preguntaId = Convert.ToInt32(cmdPregunta.ExecuteScalar());
 
-                // Insertar Opciones
                 foreach (var o in p.Opciones)
                 {
                     string sqlInsertOpcion = @"
@@ -129,18 +143,16 @@ namespace AI_TestMaker
             return testId;
         }
 
-        // -------------------------------------------------------------
-        // CARGAR TEST POR ID
-        // -------------------------------------------------------------
         public Test CargarTest(int id)
         {
             using var conn = new SQLiteConnection(_connectionString);
             conn.Open();
 
-            string sqlTest = "SELECT * FROM Test WHERE Id = @id";
+            string sqlTest = "SELECT * FROM Test WHERE Id = @id AND UserId = @uid";
 
             using var cmdTest = new SQLiteCommand(sqlTest, conn);
             cmdTest.Parameters.AddWithValue("@id", id);
+            cmdTest.Parameters.AddWithValue("@uid", Session.UserId);
 
             using var reader = cmdTest.ExecuteReader();
 
@@ -157,7 +169,6 @@ namespace AI_TestMaker
 
             reader.Close();
 
-            // Cargar Preguntas
             string sqlPreguntas = "SELECT * FROM Pregunta WHERE TestId = @id";
 
             using var cmdPreg = new SQLiteCommand(sqlPreguntas, conn);
@@ -205,9 +216,6 @@ namespace AI_TestMaker
             return test;
         }
 
-        // -------------------------------------------------------------
-        // LISTAR TESTS
-        // -------------------------------------------------------------
         public List<TestResumen> ListarTests()
         {
             var lista = new List<TestResumen>();
@@ -215,9 +223,16 @@ namespace AI_TestMaker
             using var conn = new SQLiteConnection(_connectionString);
             conn.Open();
 
-            string sql = "SELECT Id, Dificultad, Tema, Fecha, Nota FROM Test ORDER BY Fecha DESC";
+            string sql = @"
+                SELECT Id, Dificultad, Tema, Fecha, Nota
+                FROM Test
+                WHERE UserId = @uid
+                ORDER BY Fecha DESC
+            ";
 
             using var cmd = new SQLiteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@uid", Session.UserId);
+
             using var reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -249,7 +264,8 @@ namespace AI_TestMaker
             cmd.CommandText = "DELETE FROM Pregunta WHERE TestId=@id";
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "DELETE FROM Test WHERE Id=@id";
+            cmd.CommandText = "DELETE FROM Test WHERE Id=@id AND UserId=@uid";
+            cmd.Parameters.AddWithValue("@uid", Session.UserId);
             cmd.ExecuteNonQuery();
         }
     }

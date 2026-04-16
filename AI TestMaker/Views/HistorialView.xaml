@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="#0B1020">
 
+    <UserControl.LayoutTransform>
+        <ScaleTransform x:Name="LocalZoom" ScaleX="1" ScaleY="1"/>
+    </UserControl.LayoutTransform>
+
     <UserControl.Resources>
 
         <!-- Colores base -->
@@ -65,105 +69,152 @@
             <Setter Property="Padding" Value="6"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
-
-                <!-- Hover -->
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#1A3A7BD5"/>
                 </Trigger>
-
-                <!-- Seleccionado -->
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="#2A4A8F"/>
-                    <!-- Azul oscuro agradable -->
                     <Setter Property="Foreground" Value="White"/>
-                    <!-- Texto legible -->
                 </Trigger>
-
             </Style.Triggers>
-
         </Style>
 
     </UserControl.Resources>
 
-    <Grid Background="{StaticResource PrimaryBackground}" Margin="40">
+    <Grid Background="{StaticResource PrimaryBackground}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <!-- Buscador -->
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <!-- CONTENEDOR RESPONSIVE CENTRADO -->
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40">
+                <Grid MaxWidth="900">
 
-        <!-- Título -->
-        <TextBlock Text="Historial de Tests"
-                   FontSize="32"
-                   FontWeight="Bold"
-                   Foreground="{StaticResource AccentBlueLight}"
-                   Margin="0 0 0 20"
-                   HorizontalAlignment="Center"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-        <!-- Lista de tests -->
-        <Border Grid.Row="2"
-                Background="{StaticResource SecondaryBackground}"
-                CornerRadius="12"
-                Padding="20">
-            <ListView x:Name="ListaTests"
-                      MouseDoubleClick="ListaTests_MouseDoubleClick">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn Header="Dificultad" Width="120" DisplayMemberBinding="{Binding Dificultad}"/>
-                        <GridViewColumn Header="Tema" Width="200" DisplayMemberBinding="{Binding Tema}"/>
-                        <!-- NUEVA -->
-                        <GridViewColumn Header="Fecha" Width="180" DisplayMemberBinding="{Binding Fecha}"/>
-                        <GridViewColumn Header="Nota" Width="80" DisplayMemberBinding="{Binding Nota}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Border>
-        
-        <!-- BUSCADOR POR TEMA -->
-        <StackPanel Grid.Row="3"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Left">
-            <TextBlock Text="Buscar por tema: "
-                       FontSize="21"
-                       Foreground="White"
-                       Margin="0 0 0 0"/>
-            <TextBox x:Name="TxtBuscarTema"
-                     Width="300"
-                     Height="35"
-                     FontSize="16"
-                     Padding="8"
-                     Background="#222"
-                     Foreground="White"
-                     BorderBrush="#555"
-                     BorderThickness="1"
-                     TextChanged="TxtBuscarTema_TextChanged"
-                     />
+                    <!-- BARRA SUPERIOR -->
+                    <Grid Grid.Row="0" Margin="0 0 0 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-        </StackPanel>
-        <!-- Botones -->
-        <StackPanel Grid.Row="4"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Margin="0 20 0 0">
+                        <!-- TÍTULO CENTRADO -->
+                        <TextBlock Text="Historial de Tests"
+               Grid.Column="1"
+               FontSize="32"
+               FontWeight="Bold"
+               Foreground="{StaticResource AccentBlueLight}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
 
-            <Button Content="Exportar a PDF"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Click="ExportarPDF_Click"/>
+                        <!-- BOTÓN VOLVER ARRIBA A LA DERECHA -->
+                        <Button Grid.Column="2"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            BorderThickness="0"
+            Cursor="Hand"
+            ToolTip="Volver al inicio"
+            Click="Volver_Click"
+            Padding="6"
+            Margin="0,0,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text=""
+                       FontFamily="Segoe Fluent Icons"
+                       FontSize="22"
+                       Foreground="{StaticResource AccentBlueLight}"
+                       VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
 
-            <Button Content="Borrar"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Margin="20 0 20 0"
-                    Click="BorrarTest_Click"/>
 
-            <Button Content="Volver al inicio"
-                    Style="{StaticResource PrimaryButtonStyle}"
-                    Click="Volver_Click"/>
-        </StackPanel>
+                    <!-- LISTA DE TESTS -->
+                    <Border Grid.Row="2"
+                            Background="{StaticResource SecondaryBackground}"
+                            CornerRadius="12"
+                            Padding="20"
+                            Margin="0,10,0,10">
+                        <ListView x:Name="ListaTests"
+                                  MouseDoubleClick="ListaTests_MouseDoubleClick">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding Id}"/>
+                                    <GridViewColumn Header="Dificultad" Width="120" DisplayMemberBinding="{Binding Dificultad}"/>
+                                    <GridViewColumn Header="Tema" Width="200" DisplayMemberBinding="{Binding Tema}"/>
+                                    <GridViewColumn Header="Fecha" Width="180" DisplayMemberBinding="{Binding Fecha}"/>
+                                    <GridViewColumn Header="Nota" Width="80" DisplayMemberBinding="{Binding Nota}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Border>
 
+                    <!-- BUSCADOR -->
+                    <StackPanel Grid.Row="3"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,10,0,10">
+
+                        <TextBlock Text="Buscar por tema:"
+                                   FontSize="18"
+                                   Foreground="White"
+                                   VerticalAlignment="Center"
+                                   Margin="0 0 10 0"/>
+
+                        <TextBox x:Name="TxtBuscarTema"
+                                 Width="300"
+                                 Height="35"
+                                 FontSize="16"
+                                 Padding="8"
+                                 Background="#222"
+                                 Foreground="White"
+                                 BorderBrush="#555"
+                                 BorderThickness="1"
+                                 TextChanged="TxtBuscarTema_TextChanged"/>
+                    </StackPanel>
+
+                    <!-- BOTONES -->
+                    <StackPanel Grid.Row="4"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="0 20 0 0">
+
+                        <!-- EXPORTAR -->
+                        <Button Style="{StaticResource PrimaryButtonStyle}"
+            Margin="0,0,20,0"
+            Click="ExportarPDF_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text=""
+                       FontFamily="Segoe Fluent Icons"
+                       FontSize="18"
+                       Margin="0,0,8,0"/>
+                                <TextBlock Text="Exportar a PDF"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- BORRAR -->
+                        <Button Style="{StaticResource PrimaryButtonStyle}"
+            Margin="0,0,20,0"
+            Click="BorrarTest_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text=""
+                       FontFamily="Segoe Fluent Icons"
+                       FontSize="18"
+                       Margin="0,0,8,0"/>
+                                <TextBlock Text="Borrar"/>
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+
+
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

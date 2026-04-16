@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="#0B1020">
 
+    <UserControl.LayoutTransform>
+        <ScaleTransform x:Name="LocalZoom" ScaleX="1" ScaleY="1"/>
+    </UserControl.LayoutTransform>
+
     <UserControl.Resources>
-        <!-- Colores base -->
         <SolidColorBrush x:Key="PrimaryBackground" Color="#0B1020"/>
         <SolidColorBrush x:Key="SecondaryBackground" Color="#141B2F"/>
         <SolidColorBrush x:Key="AccentBlue" Color="#3A7BD5"/>
@@ -12,7 +15,6 @@
         <SolidColorBrush x:Key="TextPrimary" Color="#FFFFFF"/>
         <SolidColorBrush x:Key="TextSecondary" Color="#B0C4DE"/>
 
-        <!-- Estilo para botones -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource AccentBlue}"/>
             <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
@@ -42,7 +44,6 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Estilo para ComboBox -->
         <Style x:Key="DarkComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Background" Value="{StaticResource SecondaryBackground}"/>
             <Setter Property="Padding" Value="8,4"/>
@@ -52,151 +53,176 @@
         </Style>
     </UserControl.Resources>
 
+    <!-- GRID PRIMARIO -->
+    <Grid x:Name="OverlayRoot" Background="{StaticResource PrimaryBackground}">
 
-    <!-- 🔥 CONTENEDOR GLOBAL PARA EL OVERLAY -->
-    <Grid x:Name="OverlayRoot">
+        <!-- 🔵 BOTÓN FIJO ARRIBA A LA DERECHA -->
+        <Button x:Name="BtnTopRight"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Background="Transparent"
+                BorderThickness="0"
+                Cursor="Hand"
+                Padding="6"
+                Panel.ZIndex="999">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="BtnTopRightIcon"
+                           FontFamily="Segoe Fluent Icons"
+                           FontSize="22"
+                           Foreground="{StaticResource AccentBlueLight}"
+                           VerticalAlignment="Center"/>
+                <TextBlock x:Name="BtnTopRightText"
+                           FontSize="16"
+                           Foreground="{StaticResource AccentBlueLight}"
+                           Margin="5,0,0,0"/>
+            </StackPanel>
+        </Button>
 
-        <!-- SCROLL PARA PANTALLAS PEQUEÑAS -->
+        <!-- 🔥 CONTENIDO SCROLLEABLE -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <!-- CONTENEDOR CENTRAL -->
-            <Grid x:Name="RootGrid" Background="{StaticResource PrimaryBackground}"
-                  Margin="40">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="40">
+                <Grid MaxWidth="900">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <!-- PANEL IZQUIERDO -->
-                <StackPanel Grid.Column="0"
-                            VerticalAlignment="Center"
-                            Margin="40">
+                    <!-- PANEL SUPERIOR -->
+                    <StackPanel Grid.Row="0"
+                                VerticalAlignment="Center"
+                                Margin="20,10,20,30">
 
-                    <TextBlock Text="AI TestMaker"
-                               FontSize="40"
-                               FontWeight="Bold"
-                               Foreground="{StaticResource AccentBlueLight}"/>
+                        <TextBlock Text="AI TestMaker"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   Foreground="{StaticResource AccentBlueLight}"/>
 
-                    <TextBlock Text="Generador inteligente de test para oposiciones"
-                               Margin="0,8,0,0"
-                               FontSize="16"
-                               Foreground="{StaticResource TextSecondary}"
-                               TextWrapping="Wrap"/>
-
-                    <Border Margin="0,30,0,0"
-                            Background="{StaticResource SecondaryBackground}"
-                            CornerRadius="8"
-                            Padding="16">
-                        <TextBlock Text="Selecciona el nivel de dificultad, el tema y la IA. El sistema generará un test adaptado a tu preparación."
+                        <TextBlock Text="Generador inteligente de test para oposiciones"
+                                   Margin="0,8,0,0"
+                                   FontSize="16"
+                                   HorizontalAlignment="Center"
                                    Foreground="{StaticResource TextSecondary}"
-                                   TextWrapping="Wrap"/>
-                    </Border>
-                </StackPanel>
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"/>
 
-                <!-- PANEL DERECHO -->
-                <Border Grid.Column="1"
-                        Background="{StaticResource SecondaryBackground}"
-                        CornerRadius="12"
-                        Padding="30"
-                        Margin="40">
-
-                    <StackPanel VerticalAlignment="Center">
-
-                        <TextBlock Text="Empezar nuevo test"
-                                   FontSize="26"
-                                   FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextPrimary}"
-                                   Margin="0,0,0,20"/>
-
-                        <!-- DIFICULTAD -->
-                        <TextBlock Text="Nivel de dificultad"
-                                   FontSize="14"
-                                   Foreground="{StaticResource TextSecondary}"
-                                   Margin="0,10,0,4"/>
-
-                        <ComboBox x:Name="DifficultyComboBox"
-                                  Style="{StaticResource DarkComboBoxStyle}"
-                                  SelectedIndex="1"
-                                  Foreground="Black">
-                            <ComboBoxItem Content="Fácil"/>
-                            <ComboBoxItem Content="Medio"/>
-                            <ComboBoxItem Content="Difícil"/>
-                        </ComboBox>
-
-                        <!-- TEMA -->
-                        <TextBlock Text="Tema del test"
-                                   Margin="0,20,0,5"
-                                   Foreground="White"
-                                   FontSize="16"/>
-
-                        <TextBox x:Name="TemaTextBox"
-                                 Width="300"
-                                 Height="35"
-                                 FontSize="16"
-                                 Padding="2"
-                                 Background="White"
-                                 Foreground="Black"
-                                 BorderBrush="#555"
-                                 BorderThickness="1"
-                                 HorizontalAlignment="Left"/>
-
-                        <!-- HISTORIAL -->
-                        <TextBlock Text="Historial de temas"
-                                   Margin="0,20,0,5"
-                                   Foreground="White"
-                                   FontSize="16"/>
-
-                        <ComboBox x:Name="HistorialComboBox"
-                                  Width="300"
-                                  Height="35"
-                                  FontSize="16"
-                                  Background="White"
-                                  Foreground="Black"
-                                  BorderBrush="#555"
-                                  BorderThickness="1"
-                                  SelectionChanged="HistorialComboBox_SelectionChanged"/>
-
-                        <Button Content="Borrar historial"
-                                Width="150"
-                                Height="35"
-                                Background="#AA3333"
-                                Foreground="White"
-                                Margin="0,10,0,0"
-                                Click="BorrarHistorial_Click"/>
-
-                        <!-- IA -->
-                        <TextBlock Text="Selecciona la IA"
-                                   Margin="0,20,0,5"
-                                   Foreground="White"
-                                   FontSize="16"/>
-
-                        <ComboBox x:Name="IAComboBox"
-                                  Style="{StaticResource DarkComboBoxStyle}"
-                                  Width="300">
-                            <ComboBoxItem Content="DeepSeek"/>
-                            <ComboBoxItem Content="Groq"/>
-                            <ComboBoxItem Content="Gemini"/>
-                            <ComboBoxItem Content="OpenRouter"/>
-                            <ComboBoxItem Content="LMStudio"/>
-                        </ComboBox>
-
-                        <!-- BOTONES -->
-                        <Button x:Name="StartTestButton"
-                                Content="Generar test"
-                                Style="{StaticResource PrimaryButtonStyle}"
-                                Margin="0,30,0,0"
-                                Click="StartTestButton_Click"/>
-
-                        <Button x:Name="HistoryButton"
-                                Content="Ver tests anteriores"
-                                Style="{StaticResource PrimaryButtonStyle}"
-                                Margin="0,10,0,0"
-                                Click="HistoryButton_Click"/>
-
+                        <Border Margin="0,30,0,0"
+                                Background="{StaticResource SecondaryBackground}"
+                                CornerRadius="8"
+                                Padding="16">
+                            <TextBlock Text="Selecciona el nivel de dificultad, el tema y la IA. El sistema generará un test adaptado a tu preparación."
+                                       Foreground="{StaticResource TextSecondary}"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"/>
+                        </Border>
                     </StackPanel>
-                </Border>
+
+                    <!-- PANEL INFERIOR -->
+                    <Border Grid.Row="1"
+                            Background="{StaticResource SecondaryBackground}"
+                            CornerRadius="12"
+                            Padding="30"
+                            Margin="20">
+
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                            <TextBlock Text="Empezar nuevo test"
+                                       FontSize="26"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimary}"
+                                       Margin="0,0,0,20"
+                                       HorizontalAlignment="Center"/>
+
+                            <TextBlock Text="Nivel de dificultad"
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextSecondary}"
+                                       Margin="0,10,0,4"/>
+
+                            <ComboBox x:Name="DifficultyComboBox"
+                                      Style="{StaticResource DarkComboBoxStyle}"
+                                      SelectedIndex="1"
+                                      Width="300"
+                                      Foreground="Black">
+                                <ComboBoxItem Content="Fácil"/>
+                                <ComboBoxItem Content="Medio"/>
+                                <ComboBoxItem Content="Difícil"/>
+                            </ComboBox>
+
+                            <TextBlock Text="Tema del test"
+                                       Margin="0,20,0,5"
+                                       Foreground="White"
+                                       FontSize="16"/>
+
+                            <TextBox x:Name="TemaTextBox"
+                                     Width="300"
+                                     Height="35"
+                                     FontSize="16"
+                                     Padding="2"
+                                     Background="White"
+                                     Foreground="Black"
+                                     BorderBrush="#555"
+                                     BorderThickness="1"/>
+
+                            <TextBlock Text="Historial de temas"
+                                       Margin="0,20,0,5"
+                                       Foreground="White"
+                                       FontSize="16"/>
+
+                            <ComboBox x:Name="HistorialComboBox"
+                                      Width="300"
+                                      Height="35"
+                                      FontSize="16"
+                                      Background="White"
+                                      Foreground="Black"
+                                      BorderBrush="#555"
+                                      BorderThickness="1"
+                                      SelectionChanged="HistorialComboBox_SelectionChanged"/>
+
+                            <Button Content="Borrar historial"
+                                    Width="150"
+                                    Height="35"
+                                    Background="#AA3333"
+                                    Foreground="White"
+                                    Margin="0,10,0,0"
+                                    Click="BorrarHistorial_Click"/>
+
+                            <TextBlock Text="Selecciona la IA"
+                                       Margin="0,20,0,5"
+                                       Foreground="White"
+                                       FontSize="16"/>
+
+                            <ComboBox x:Name="IAComboBox"
+                                      Style="{StaticResource DarkComboBoxStyle}"
+                                      Width="300">
+                                <ComboBoxItem Content="DeepSeek"/>
+                                <ComboBoxItem Content="Groq"/>
+                                <ComboBoxItem Content="Gemini"/>
+                                <ComboBoxItem Content="OpenRouter"/>
+                                <ComboBoxItem Content="LMStudio"/>
+                            </ComboBox>
+
+                            <Button x:Name="StartTestButton"
+                                    Content="Generar test"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Margin="0,30,0,0"
+                                    Click="StartTestButton_Click"/>
+
+                            <Button x:Name="HistoryButton"
+                                    Content="Ver tests anteriores"
+                                    Style="{StaticResource PrimaryButtonStyle}"
+                                    Margin="0,10,0,0"
+                                    Click="HistoryButton_Click"/>
+
+                        </StackPanel>
+                    </Border>
+
+                </Grid>
             </Grid>
         </ScrollViewer>
+
     </Grid>
+
 </UserControl>

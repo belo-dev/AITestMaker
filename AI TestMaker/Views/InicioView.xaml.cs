@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AI_TestMaker.Classes;
+using AI_TestMaker.DB.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +24,36 @@ namespace AI_TestMaker.Views
             InitializeComponent();
             CargarHistorial();
             IAComboBox.SelectedIndex = 1;
+            ZoomManager.ZoomChanged += OnZoomChanged;
+
+            if (Session.IsGuest)
+            {
+                BtnTopRightIcon.Text = ""; // Icono login
+                BtnTopRightText.Text = "Iniciar sesión";
+                BtnTopRight.Click += (s, e) =>
+                {
+                    ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
+                };
+            }
+            else
+            {
+                BtnTopRightIcon.Text = ""; // Icono logout
+                BtnTopRightText.Text = "Cerrar sesión";
+                BtnTopRight.Click += (s, e) =>
+                {
+                    Session.Logout();
+                    ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
+                };
+            }
+
         }
 
-        
+        private void OnZoomChanged(double zoom)
+        {
+            LocalZoom.ScaleX = zoom;
+            LocalZoom.ScaleY = zoom;
+        }
+
         private void CargarHistorial() 
         { 
             var historial = TopicHistoryManager.ObtenerHistorial(); 
@@ -33,6 +62,16 @@ namespace AI_TestMaker.Views
 
         private async void StartTestButton_Click(object sender, RoutedEventArgs e)
         {
+            if (Session.IsGuest && Session.GuestTestsUsed >= 1)
+            {
+                MessageBox.Show("Has alcanzado el límite de tests en modo invitado. Regístrate para continuar.");
+                ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
+                return;
+            }
+
+            if (Session.IsGuest)
+                Session.GuestTestsUsed++;
+
             string dificultad = ((ComboBoxItem)DifficultyComboBox.SelectedItem).Content.ToString();
             string agente = ((ComboBoxItem)IAComboBox.SelectedItem).Content.ToString();
             string tema = TemaTextBox.Text.Trim();
@@ -82,6 +121,7 @@ namespace AI_TestMaker.Views
 
             this.BeginAnimation(OpacityProperty, fade);
         }
+
 
         private void HistorialComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

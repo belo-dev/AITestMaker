@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AI_TestMaker.Classes;
+using AI_TestMaker.DB;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -27,6 +29,13 @@ namespace AI_TestMaker.Views
 
             IniciarCronometro();
             CargarPreguntas();
+            ZoomManager.ZoomChanged += OnZoomChanged;
+        }
+
+        private void OnZoomChanged(double zoom)
+        {
+            LocalZoom.ScaleX = zoom;
+            LocalZoom.ScaleY = zoom;
         }
 
         private void IniciarCronometro()

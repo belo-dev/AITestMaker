@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\CambiarPassWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\HistorialView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -16,7 +19,16 @@
     <Compile Update="Views\LoadingView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\LoginView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\PreguntaControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ProfileView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RegisterView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\ResultadosView.xaml.cs">
@@ -30,7 +42,19 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\CambiarPassWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\LoadingView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ProfileView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RegisterView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
