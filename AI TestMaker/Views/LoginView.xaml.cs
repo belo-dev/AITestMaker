@@ -34,6 +34,7 @@ namespace AI_TestMaker.Views
 
             Session.UserId = user.Id;
             Session.Username = user.Username;
+            Session.IsGuest = false;
 
             ((MainWindow)Application.Current.MainWindow).Content = new InicioView();
         }
