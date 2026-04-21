@@ -1,26 +1,154 @@
 ﻿<UserControl x:Class="AI_TestMaker.Views.ProfileView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:AI_TestMaker.Converters"
+             xmlns:local="clr-namespace:AI_TestMaker.Views"
              Background="#0B1020">
+
+    <UserControl.Resources>
+        <conv:HalfConverter x:Key="HalfConverter"/>
+    </UserControl.Resources>
+
+    <UserControl.LayoutTransform>
+        <ScaleTransform x:Name="LocalZoom" ScaleX="1" ScaleY="1"/>
+    </UserControl.LayoutTransform>
 
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
 
+        <!-- BOTÓN ARRIBA A LA DERECHA -->
+        <Button x:Name="BtnBack"
+                Panel.ZIndex="999"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Background="Transparent"
+                BorderThickness="0"
+                Cursor="Hand"
+                ToolTip="Volver al inicio"
+                Click="IrInicio_Click">
+
+            <TextBlock Text=""
+                       FontFamily="Segoe Fluent Icons"
+                       FontSize="26"
+                       Foreground="#5FA8FF"/>
+        </Button>
+
+        <!-- TARJETA DEL PERFIL -->
         <Border Background="#141B2F"
-                Padding="30"
-                CornerRadius="12"
-                Width="420">
+                Padding="40"
+                CornerRadius="16"
+                Width="480"
+                Effect="{DynamicResource DropShadow}">
 
             <StackPanel>
 
-                <!-- TÍTULO -->
-                <TextBlock Text="Mi perfil"
-                           FontSize="30"
-                           FontWeight="Bold"
-                           Foreground="#5FA8FF"
-                           HorizontalAlignment="Center"
-                           Margin="0 0 0 25"/>
+                <!-- FOTO + NOMBRE -->
+                <StackPanel HorizontalAlignment="Center" Margin="0 0 0 25" Height="124">
 
-                <!-- BANNER MODO INVITADO -->
+                    <!-- FOTO CLICABLE -->
+
+
+                    <!-- NOMBRE -->
+                    <!-- FOTO CLICABLE -->
+
+
+                    <!-- NOMBRE -->
+                    <!-- FOTO CLICABLE -->
+                    <Border x:Name="FotoBorder"
+                            Width="118" Height="118"
+                            CornerRadius="59"
+                            Background="#1F253A"
+                            BorderBrush="#3A7BD5"
+                            BorderThickness="4"
+                            Cursor="Hand"
+                            MouseDown="CambiarFoto_Click">
+
+                        <!-- ANIMACIONES -->
+                        <Border.Triggers>
+
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="HoverOverlay"
+                                     Storyboard.TargetProperty="Opacity"
+                                     To="1" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="HoverCameraIcon"
+                                     Storyboard.TargetProperty="Opacity"
+                                     To="1" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="HoverOverlay"
+                                     Storyboard.TargetProperty="Opacity"
+                                     To="0" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="HoverCameraIcon"
+                                     Storyboard.TargetProperty="Opacity"
+                                     To="0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                        </Border.Triggers>
+
+                        <Grid Width="110" Height="110">
+
+                            <!-- RECORTE CIRCULAR SOLO PARA LA IMAGEN -->
+                            <Grid.Clip>
+                                <EllipseGeometry Center="55,55" RadiusX="55" RadiusY="55"/>
+                            </Grid.Clip>
+
+                            <!-- FOTO REAL -->
+                            <Image x:Name="ImgFoto"
+                                   Stretch="UniformToFill"
+                                   Visibility="Collapsed"/>
+
+                            <!-- CAPA OSCURA -->
+                            <Ellipse x:Name="HoverOverlay"
+                                       Width="110" 
+                                       Height="110"
+                                       Fill="#80000000"
+                                       Opacity="0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+
+                            <!-- ICONO DE CÁMARA -->
+                            <TextBlock x:Name="HoverCameraIcon"
+               Text=""
+               FontFamily="Segoe MDL2 Assets"
+               FontSize="40"
+               Foreground="White"
+               Opacity="0"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+
+                            <!-- ICONO SI NO HAY FOTO -->
+                            <TextBlock x:Name="IconoFoto"
+               Text="&#xE13D;"
+               FontFamily="Segoe MDL2 Assets"
+               FontSize="60"
+               Foreground="#5FA8FF"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"/>
+
+                        </Grid>
+
+
+                    </Border>
+
+
+                    <!-- NOMBRE -->
+                    <TextBlock x:Name="TxtUsername"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- BANNER INVITADO -->
                 <Border x:Name="BannerInvitado"
                         Background="#332E5A"
                         CornerRadius="8"
@@ -32,48 +160,44 @@
                                TextWrapping="Wrap"/>
                 </Border>
 
-                <!-- DATOS DEL USUARIO -->
+                <!-- SEPARADOR -->
+                <Rectangle Height="1" Fill="#2A3147" Margin="0 10 0 20"/>
+
+                <!-- DATOS -->
                 <StackPanel Margin="0 0 0 25">
 
-                    <TextBlock Text="Usuario"
-                               Foreground="#B0C4DE"
-                               Margin="0 0 0 4"/>
-                    <TextBlock x:Name="TxtUsername"
-                               Foreground="White"
-                               FontSize="16"
-                               FontWeight="SemiBold"
-                               Margin="0 0 0 12"/>
-
                     <TextBlock Text="Estado"
-                               Foreground="#B0C4DE"
-                               Margin="0 0 0 4"/>
+                               Foreground="#5FA8FF"
+                               FontWeight="SemiBold"/>
                     <TextBlock x:Name="TxtEstado"
                                Foreground="White"
                                Margin="0 0 0 12"/>
 
                     <TextBlock Text="Tests realizados"
-                               Foreground="#B0C4DE"
-                               Margin="0 0 0 4"/>
+                               Foreground="#5FA8FF"
+                               FontWeight="SemiBold"/>
                     <TextBlock x:Name="TxtTestsRealizados"
                                Foreground="White"
                                Margin="0 0 0 12"/>
 
                     <TextBlock Text="Último test"
-                               Foreground="#B0C4DE"
-                               Margin="0 0 0 4"/>
+                               Foreground="#5FA8FF"
+                               FontWeight="SemiBold"/>
                     <TextBlock x:Name="TxtUltimoTest"
                                Foreground="White"
                                Margin="0 0 0 12"/>
 
                 </StackPanel>
 
-                <!-- BOTONES DE ACCIÓN -->
+                <!-- SEPARADOR -->
+                <Rectangle Height="1" Fill="#2A3147" Margin="0 10 0 20"/>
+
+                <!-- BOTONES -->
                 <StackPanel>
 
-                    <!-- Cambiar contraseña -->
                     <Button x:Name="BtnCambiarPass"
                             Content="Cambiar contraseña"
-                            Height="38"
+                            Height="42"
                             Background="#3A7BD5"
                             Foreground="White"
                             FontWeight="SemiBold"
@@ -83,10 +207,9 @@
                             Visibility="Collapsed"
                             Click="CambiarPass_Click"/>
 
-                    <!-- Eliminar cuenta -->
                     <Button x:Name="BtnEliminarCuenta"
                             Content="Eliminar cuenta"
-                            Height="38"
+                            Height="42"
                             Background="#AA3333"
                             Foreground="White"
                             FontWeight="SemiBold"
@@ -96,10 +219,9 @@
                             Visibility="Collapsed"
                             Click="EliminarCuenta_Click"/>
 
-                    <!-- Crear cuenta (solo invitado) -->
                     <Button x:Name="BtnCrearCuenta"
                             Content="Crear cuenta"
-                            Height="38"
+                            Height="42"
                             Background="#5FA8FF"
                             Foreground="White"
                             FontWeight="SemiBold"
@@ -109,19 +231,8 @@
                             Visibility="Collapsed"
                             Click="CrearCuenta_Click"/>
 
-                    <!-- Navegación -->
-                    <Button Content="Ir al inicio"
-                            Height="38"
-                            Background="#3A7BD5"
-                            Foreground="White"
-                            FontWeight="SemiBold"
-                            BorderThickness="0"
-                            Cursor="Hand"
-                            Margin="0 0 0 8"
-                            Click="IrInicio_Click"/>
-
                     <Button Content="Ver historial"
-                            Height="38"
+                            Height="42"
                             Background="#5FA8FF"
                             Foreground="White"
                             FontWeight="SemiBold"
@@ -131,7 +242,7 @@
                             Click="VerHistorial_Click"/>
 
                     <Button Content="Cerrar sesión"
-                            Height="38"
+                            Height="42"
                             Background="#AA3333"
                             Foreground="White"
                             FontWeight="SemiBold"

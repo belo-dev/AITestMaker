@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:AI_TestMaker"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
+        <DropShadowEffect x:Key="DropShadow"
+                  BlurRadius="18"
+                  ShadowDepth="0"
+                  Color="#000000"
+                  Opacity="0.45"/>
+
     </Application.Resources>
 </Application>

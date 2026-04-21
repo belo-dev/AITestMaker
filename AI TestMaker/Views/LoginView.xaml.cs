@@ -3,6 +3,7 @@ using AI_TestMaker.DB.Login;
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace AI_TestMaker.Views
 {
@@ -35,8 +36,17 @@ namespace AI_TestMaker.Views
             Session.UserId = user.Id;
             Session.Username = user.Username;
             Session.IsGuest = false;
+            Session.CurrentUser = user;
 
             ((MainWindow)Application.Current.MainWindow).Content = new InicioView();
+        }
+
+        private void LoginView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Entrar_Click(null, null);
+            }
         }
 
         private void CrearCuenta_Click(object sender, RoutedEventArgs e)

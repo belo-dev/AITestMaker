@@ -145,3 +145,6 @@ D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windo
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\ProfileView.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\CambiarPassWindow.g.cs
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\Views\ProfileView.g.cs
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\AI TestMaker_MarkupCompile.lref
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\App.baml
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs

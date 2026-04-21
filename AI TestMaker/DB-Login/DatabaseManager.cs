@@ -10,15 +10,21 @@ namespace AI_TestMaker.DB
     {
         private readonly string _connectionString;
 
-        public DatabaseManager(string databasePath = "tests.db")
+        public DatabaseManager()
         {
-            bool crearTablas = !File.Exists(databasePath);
+            string dbPath = System.IO.Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "tests.db"
+            );
 
-            _connectionString = $"Data Source={databasePath};Version=3;";
+            bool crearTablas = !File.Exists(dbPath);
+
+            _connectionString = $"Data Source={dbPath};Version=3;";
 
             if (crearTablas)
                 CrearTablas();
         }
+
 
         public void CrearTablas()
         {
@@ -31,9 +37,12 @@ namespace AI_TestMaker.DB
                     Username TEXT UNIQUE NOT NULL,
                     PasswordHash TEXT NOT NULL,
                     Salt TEXT NOT NULL,
-                    FechaRegistro TEXT NOT NULL
+                    FechaRegistro TEXT NOT NULL,
+                    Nombre TEXT,
+                    Foto BLOB
                 );
             ";
+
 
             string sqlTest = @"
                 CREATE TABLE IF NOT EXISTS Test (

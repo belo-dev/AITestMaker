@@ -23,6 +23,19 @@
                            HorizontalAlignment="Center"
                            Margin="0 0 0 25"/>
 
+                <!-- Nombre real -->
+                <TextBlock Text="Nombre real"
+                           Foreground="#B0C4DE"
+                           Margin="0 0 0 4"/>
+                <TextBox x:Name="TxtNombre"
+                         Height="35"
+                         Background="White"
+                         Foreground="Black"
+                         BorderBrush="#3A7BD5"
+                         BorderThickness="1"
+                         Padding="6"
+                         Margin="0 0 0 12"/>
+
                 <!-- Usuario -->
                 <TextBlock Text="Usuario"
                            Foreground="#B0C4DE"

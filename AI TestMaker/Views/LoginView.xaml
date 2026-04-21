@@ -1,7 +1,8 @@
 ﻿<UserControl x:Class="AI_TestMaker.Views.LoginView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Background="#0B1020">
+             Background="#0B1020"
+             KeyDown="LoginView_KeyDown">
 
     <UserControl.LayoutTransform>
         <ScaleTransform x:Name="LocalZoom" ScaleX="1" ScaleY="1"/>

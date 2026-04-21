@@ -1,19 +1,14 @@
 ﻿using AI_TestMaker.Classes;
 using AI_TestMaker.DB.Login;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
+using System.IO;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AI_TestMaker.Views
 {
@@ -26,26 +21,77 @@ namespace AI_TestMaker.Views
             IAComboBox.SelectedIndex = 1;
             ZoomManager.ZoomChanged += OnZoomChanged;
 
+            ConfigurarBotonSuperior();
+        }
+
+        private void ConfigurarBotonSuperior()
+        {
             if (Session.IsGuest)
             {
-                BtnTopRightIcon.Text = ""; // Icono login
+                // Invitado → icono login
+                BtnTopRightIcon.Text = "";
                 BtnTopRightText.Text = "Iniciar sesión";
+
+                BtnTopRightEllipse.Visibility = Visibility.Collapsed;
+
                 BtnTopRight.Click += (s, e) =>
                 {
                     ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
                 };
+
+                UserMenu.Visibility = Visibility.Collapsed;
             }
             else
             {
-                BtnTopRightIcon.Text = ""; // Icono logout
-                BtnTopRightText.Text = "Cerrar sesión";
+                // Usuario registrado → mostrar foto + nombre
+                BtnTopRightText.Text = Session.CurrentUser?.Nombre ?? Session.Username;
+
+                ActualizarAvatarSuperior(Session.CurrentUser?.Foto);
+
                 BtnTopRight.Click += (s, e) =>
                 {
-                    Session.Logout();
-                    ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
+                    UserMenu.PlacementTarget = BtnTopRight;
+                    UserMenu.IsOpen = true;
                 };
-            }
 
+                UserMenu.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ActualizarAvatarSuperior(byte[] foto)
+        {
+            if (foto != null && foto.Length > 0)
+            {
+                var bitmap = ByteArrayToImage(foto);
+
+                var brush = new ImageBrush(bitmap)
+                {
+                    Stretch = Stretch.UniformToFill,
+                    AlignmentX = AlignmentX.Center,
+                    AlignmentY = AlignmentY.Center
+                };
+                BtnTopRightFotoBorder.BorderThickness = new Thickness(0);
+                BtnTopRightEllipse.Fill = brush;
+                BtnTopRightEllipse.Visibility = Visibility.Visible;
+                BtnTopRightIcon.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                BtnTopRightEllipse.Visibility = Visibility.Collapsed;
+                BtnTopRightIcon.Visibility = Visibility.Visible;
+            }
+        }
+
+        private BitmapImage ByteArrayToImage(byte[] bytes)
+        {
+            using var ms = new MemoryStream(bytes);
+            var img = new BitmapImage();
+            img.BeginInit();
+            img.CacheOption = BitmapCacheOption.OnLoad;
+            img.StreamSource = ms;
+            img.EndInit();
+            img.Freeze();
+            return img;
         }
 
         private void OnZoomChanged(double zoom)
@@ -54,10 +100,10 @@ namespace AI_TestMaker.Views
             LocalZoom.ScaleY = zoom;
         }
 
-        private void CargarHistorial() 
-        { 
-            var historial = TopicHistoryManager.ObtenerHistorial(); 
-            HistorialComboBox.ItemsSource = historial.Select(x => $"{x.Tema} (x{x.Frecuencia})"); 
+        private void CargarHistorial()
+        {
+            var historial = TopicHistoryManager.ObtenerHistorial();
+            HistorialComboBox.ItemsSource = historial.Select(x => $"{x.Tema} (x{x.Frecuencia})");
         }
 
         private async void StartTestButton_Click(object sender, RoutedEventArgs e)
@@ -83,24 +129,15 @@ namespace AI_TestMaker.Views
                 return;
             }
 
-            // Guardar historial
             TopicHistoryManager.AgregarTema(tema);
             CargarHistorial();
 
-            // Mostrar pantalla de carga
             var loading = new LoadingView();
             OverlayRoot.Children.Add(loading);
 
-            List<Pregunta> preguntas = null;
+            var preguntas = await AIQuestionGenerator.GenerarPreguntasIA(tema, dificultad, agente);
 
-            try
-            {
-                preguntas = await AIQuestionGenerator.GenerarPreguntasIA(tema, dificultad, agente);
-            }
-            finally
-            {
-                loading.FadeOutAndRemove();
-            }
+            loading.FadeOutAndRemove();
 
             TimeSpan tiempoMaximo = dificultad switch
             {
@@ -112,7 +149,6 @@ namespace AI_TestMaker.Views
 
             Test test = new Test(dificultad, preguntas, tiempoMaximo, tema);
 
-            // Transición suave hacia TestView
             var fade = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(300));
             fade.Completed += (s, e2) =>
             {
@@ -122,12 +158,10 @@ namespace AI_TestMaker.Views
             this.BeginAnimation(OpacityProperty, fade);
         }
 
-
         private void HistorialComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (HistorialComboBox.SelectedItem is string item)
             {
-                // Extraer solo el tema (antes del " (xN)")
                 string tema = item.Split("(x")[0].Trim();
                 TemaTextBox.Text = tema;
             }
@@ -144,6 +178,48 @@ namespace AI_TestMaker.Views
         {
             ((MainWindow)Application.Current.MainWindow).Content =
               new HistorialView();
+        }
+
+        private void MenuPerfil_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).Content = new ProfileView();
+        }
+
+        private void MenuCambiarPass_Click(object sender, RoutedEventArgs e)
+        {
+            var ventana = new CambiarPassWindow();
+            ventana.Owner = Application.Current.MainWindow;
+            ventana.ShowDialog();
+        }
+
+        private void MenuLogout_Click(object sender, RoutedEventArgs e)
+        {
+            Session.Logout();
+            ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
+        }
+
+        private void BtnTopRight_Click(object sender, RoutedEventArgs e)
+        {
+            var mouseEvent = e as MouseButtonEventArgs;
+
+            // Si es invitado → clic izquierdo abre login
+            if (Session.IsGuest)
+            {
+                ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
+                return;
+            }
+
+            // Si NO es invitado → solo abrir menú con clic derecho
+            if (mouseEvent != null && mouseEvent.ChangedButton == MouseButton.Right)
+            {
+                UserMenu.PlacementTarget = BtnTopRight;
+                UserMenu.IsOpen = true;
+            }
+            else
+            {
+                // Clic izquierdo en usuario registrado → abrir perfil
+                ((MainWindow)Application.Current.MainWindow).Content = new ProfileView();
+            }
         }
     }
 }

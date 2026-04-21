@@ -9,8 +9,13 @@ namespace AI_TestMaker.DB.Login
     {
         private readonly string _connectionString;
 
-        public UserRepository(string dbPath = "tests.db")
+        public UserRepository()
         {
+            string dbPath = System.IO.Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "tests.db"
+            );
+
             _connectionString = $"Data Source={dbPath};Version=3;";
         }
 
@@ -29,7 +34,7 @@ namespace AI_TestMaker.DB.Login
             return Convert.ToBase64String(saltBytes);
         }
 
-        public bool Register(string username, string password)
+        public bool Register(string username, string password, string nombre)
         {
             string salt = GenerateSalt();
             string hash = HashPassword(password, salt);
@@ -38,15 +43,17 @@ namespace AI_TestMaker.DB.Login
             conn.Open();
 
             string sql = @"
-                INSERT INTO Users (Username, PasswordHash, Salt, FechaRegistro)
-                VALUES (@u, @h, @s, @f);
-            ";
+        INSERT INTO Users (Username, PasswordHash, Salt, FechaRegistro, Nombre, Foto)
+        VALUES (@u, @h, @s, @f, @n, @foto);
+    ";
 
             using var cmd = new SQLiteCommand(sql, conn);
             cmd.Parameters.AddWithValue("@u", username);
             cmd.Parameters.AddWithValue("@h", hash);
             cmd.Parameters.AddWithValue("@s", salt);
             cmd.Parameters.AddWithValue("@f", DateTime.Now.ToString("s"));
+            cmd.Parameters.AddWithValue("@n", nombre);   // ← nombre real
+            cmd.Parameters.AddWithValue("@foto", DBNull.Value);
 
             try
             {
@@ -58,6 +65,7 @@ namespace AI_TestMaker.DB.Login
                 return false; // usuario duplicado
             }
         }
+
 
         public User Login(string username, string password)
         {
@@ -88,8 +96,36 @@ namespace AI_TestMaker.DB.Login
                 Username = reader["Username"].ToString(),
                 PasswordHash = hash,
                 Salt = salt,
-                FechaRegistro = DateTime.Parse(reader["FechaRegistro"].ToString())
+                FechaRegistro = DateTime.Parse(reader["FechaRegistro"].ToString()),
+                Nombre = reader["Nombre"]?.ToString(),
+                Foto = reader["Foto"] as byte[]
             };
+        }
+
+        public void ActualizarNombre(int userId, string nuevoNombre)
+        {
+            using var conn = new SQLiteConnection(_connectionString);
+            conn.Open();
+
+            string sql = "UPDATE Users SET Nombre=@n WHERE Id=@id";
+
+            using var cmd = new SQLiteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@n", nuevoNombre);
+            cmd.Parameters.AddWithValue("@id", userId);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void ActualizarFoto(int userId, byte[] foto)
+        {
+            using var conn = new SQLiteConnection(_connectionString);
+            conn.Open();
+
+            string sql = "UPDATE Users SET Foto=@f WHERE Id=@id";
+
+            using var cmd = new SQLiteCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@f", foto);
+            cmd.Parameters.AddWithValue("@id", userId);
+            cmd.ExecuteNonQuery();
         }
 
         public bool CambiarContraseña(int userId, string contraseñaActual, string nuevaContraseña)
@@ -98,7 +134,6 @@ namespace AI_TestMaker.DB.Login
             {
                 conn.Open();
 
-                // 1. Obtener usuario
                 string query = "SELECT PasswordHash, Salt FROM Users WHERE Id = @id";
                 using (var cmd = new SQLiteCommand(query, conn))
                 {
@@ -112,16 +147,13 @@ namespace AI_TestMaker.DB.Login
                         string hashActual = reader.GetString(0);
                         string salt = reader.GetString(1);
 
-                        // 2. Validar contraseña actual
                         string hashComprobado = HashPassword(contraseñaActual, salt);
                         if (hashComprobado != hashActual)
                             return false;
 
-                        // 3. Generar nuevo hash
                         string nuevoSalt = GenerateSalt();
                         string nuevoHash = HashPassword(nuevaContraseña, nuevoSalt);
 
-                        // 4. Guardar en DB
                         string update = "UPDATE Users SET PasswordHash = @hash, Salt = @salt WHERE Id = @id2";
                         using (var cmd2 = new SQLiteCommand(update, conn))
                         {
@@ -147,7 +179,6 @@ namespace AI_TestMaker.DB.Login
                 {
                     try
                     {
-                        // 1. Borrar tests del usuario
                         string deleteTests = "DELETE FROM Tests WHERE UserId = @id";
                         using (var cmd = new SQLiteCommand(deleteTests, conn))
                         {
@@ -155,7 +186,6 @@ namespace AI_TestMaker.DB.Login
                             cmd.ExecuteNonQuery();
                         }
 
-                        // 2. Borrar usuario
                         string deleteUser = "DELETE FROM Users WHERE Id = @id";
                         using (var cmd = new SQLiteCommand(deleteUser, conn))
                         {
@@ -174,6 +204,5 @@ namespace AI_TestMaker.DB.Login
                 }
             }
         }
-
     }
 }

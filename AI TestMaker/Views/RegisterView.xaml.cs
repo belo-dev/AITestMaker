@@ -29,7 +29,17 @@ namespace AI_TestMaker.Views
                 return;
             }
 
-            bool ok = _repo.Register(TxtUser.Text, TxtPass.Password);
+            string nombre = TxtNombre.Text.Trim();
+            string usuario = TxtUser.Text.Trim();
+            string pass = TxtPass.Password.Trim();
+
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                MessageBox.Show("Introduce tu nombre real.");
+                return;
+            }
+
+            bool ok = _repo.Register(usuario, pass, nombre);
 
             if (!ok)
             {
@@ -41,6 +51,7 @@ namespace AI_TestMaker.Views
 
             ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
         }
+
 
         private void Volver_Click(object sender, RoutedEventArgs e)
         {
