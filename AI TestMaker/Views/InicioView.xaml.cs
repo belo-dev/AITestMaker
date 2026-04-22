@@ -115,9 +115,6 @@ namespace AI_TestMaker.Views
                 return;
             }
 
-            if (Session.IsGuest)
-                Session.GuestTestsUsed++;
-
             string dificultad = ((ComboBoxItem)DifficultyComboBox.SelectedItem).Content.ToString();
             string agente = ((ComboBoxItem)IAComboBox.SelectedItem).Content.ToString();
             string tema = TemaTextBox.Text.Trim();
@@ -138,6 +135,9 @@ namespace AI_TestMaker.Views
             var preguntas = await AIQuestionGenerator.GenerarPreguntasIA(tema, dificultad, agente);
 
             loading.FadeOutAndRemove();
+
+            if (Session.IsGuest)
+                Session.GuestTestsUsed++;
 
             TimeSpan tiempoMaximo = dificultad switch
             {

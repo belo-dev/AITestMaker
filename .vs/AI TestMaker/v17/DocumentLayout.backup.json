@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\inicioview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\inicioview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\inicioview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\inicioview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\profileview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\profileview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\profileview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\profileview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,58 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "InicioView.xaml",
-              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\InicioView.xaml",
-              "RelativeDocumentMoniker": "AI TestMaker\\Views\\InicioView.xaml",
-              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\InicioView.xaml*",
-              "RelativeToolTip": "AI TestMaker\\Views\\InicioView.xaml*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-21T21:42:33.664Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InicioView.xaml.cs",
-              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\InicioView.xaml.cs",
-              "RelativeDocumentMoniker": "AI TestMaker\\Views\\InicioView.xaml.cs",
-              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\InicioView.xaml.cs",
-              "RelativeToolTip": "AI TestMaker\\Views\\InicioView.xaml.cs",
-              "ViewState": "AgIAALcAAAAAAAAAAAAkwOEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-21T20:58:15.474Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProfileView.xaml",
-              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\ProfileView.xaml",
-              "RelativeDocumentMoniker": "AI TestMaker\\Views\\ProfileView.xaml",
-              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\ProfileView.xaml",
-              "RelativeToolTip": "AI TestMaker\\Views\\ProfileView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-04-16T17:09:29.676Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProfileView.xaml.cs",
-              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\ProfileView.xaml.cs",
-              "RelativeDocumentMoniker": "AI TestMaker\\Views\\ProfileView.xaml.cs",
-              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\ProfileView.xaml.cs",
-              "RelativeToolTip": "AI TestMaker\\Views\\ProfileView.xaml.cs",
-              "ViewState": "AgIAAP4AAAAAAAAAAAAkwA8BAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T17:10:52.502Z"
             }
           ]
         }

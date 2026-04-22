@@ -1,0 +1,3 @@
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Release\net8.0-windows\win-x64\publish\AI TestMaker.pdb
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Release\net8.0-windows\win-x64\publish\AI TestMaker.dll.config
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\bin\Release\net8.0-windows\win-x64\publish\AI TestMaker.exe
