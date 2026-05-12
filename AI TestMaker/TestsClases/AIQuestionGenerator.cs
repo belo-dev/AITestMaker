@@ -1,5 +1,6 @@
 ﻿using AI_TestMaker;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,9 @@ using System.Threading.Tasks;
 
 public static class AIQuestionGenerator
 {
+    // 🔥 Activa/desactiva logs globalmente
+    private const bool DEBUG_LOG = true;
+
     public static async Task<List<Pregunta>> GenerarPreguntasIA(
             string tema, string dificultad, string agenteSeleccionado)
     {
@@ -38,18 +42,11 @@ public static class AIQuestionGenerator
                 tema, dificultad, cantidadTanda, preguntasAcumuladas
             );
 
-            var respuesta = await AgentManager.EjecutarConFallback(agente.Nombre, prompt);
-
-            var nuevasPreguntas = ParsearPreguntas(respuesta);
+            List<Pregunta> nuevasPreguntas = await ObtenerPreguntasConFallback(agente.Nombre, prompt);
 
             foreach (var pregunta in nuevasPreguntas)
             {
-                // Limpieza de numeración automática
-                pregunta.Enunciado = Regex.Replace(
-                    pregunta.Enunciado,
-                    @"^\s*\d+[\.\)\-]\s*",
-                    ""
-                );
+                pregunta.Enunciado = SanitizarTexto(pregunta.Enunciado);
 
                 if (!enunciadosPrevios.Contains(pregunta.Enunciado))
                 {
@@ -59,12 +56,8 @@ public static class AIQuestionGenerator
             }
 
             restantes = cantidad - preguntasAcumuladas.Count;
-
-            if (nuevasPreguntas.Count == 0)
-                throw new Exception("No se pudieron generar suficientes preguntas únicas.");
         }
 
-        // 🔥 Numeración final correcta
         var listaFinal = preguntasAcumuladas.Take(cantidad).ToList();
 
         for (int i = 0; i < listaFinal.Count; i++)
@@ -73,19 +66,22 @@ public static class AIQuestionGenerator
         return listaFinal;
     }
 
-
-    private static string CrearPromptConExclusiones(string tema, string dificultad, int cantidad, List<Pregunta> preguntasPrevias)
+    // ============================================================
+    // 🔥 Prompt con exclusiones restaurado
+    // ============================================================
+    private static string CrearPromptConExclusiones(string tema, string dificultad, int cantidad, List<Pregunta> previas)
     {
         string exclusiones = "";
-        if (preguntasPrevias.Count > 0)
+
+        if (previas.Count > 0)
         {
             exclusiones = "NO repitas ni crees preguntas similares a las siguientes ya generadas:\n";
-            foreach (var p in preguntasPrevias)
+            foreach (var p in previas)
                 exclusiones += $"- {p.Enunciado}\n";
         }
 
         return $@"
-Genera EXACTAMENTE {cantidad} preguntas tipo test sobre el tema ""{tema}"".
+Genera EXACTAMENTE {cantidad} preguntas en Español tipo test sobre el tema ""{tema}"".
 Nivel de dificultad: {dificultad}.
 
 {exclusiones}
@@ -129,33 +125,74 @@ DEVUELVE SOLO EL JSON.
 ";
     }
 
-    // 🔥 Blindaje total: extrae solo el JSON válido
-    private static string ExtraerSoloJSON(string raw)
+    // ============================================================
+    // 🔥 Fallback con logging
+    // ============================================================
+    private static async Task<List<Pregunta>> ObtenerPreguntasConFallback(string agente, string prompt)
     {
-        int first = raw.IndexOf('{');
-        int last = raw.LastIndexOf('}');
+        int intentos = 0;
+        const int MAX_INTENTOS = 20;
 
-        if (first == -1 || last == -1 || last <= first)
-            throw new Exception("La IA devolvió un formato no válido.");
+        while (intentos < MAX_INTENTOS)
+        {
+            string respuesta = await AgentManager.EjecutarConFallback(agente, prompt);
 
-        string contenido = raw.Substring(first, last - first + 1);
+            Log($"Intento #{intentos + 1}");
+            LogJson("JSON ORIGINAL RECIBIDO", respuesta);
 
-        // Si hay otro JSON después, eliminarlo
-        int next = raw.IndexOf('{', last + 1);
-        if (next != -1)
-            return contenido;
+            try
+            {
+                var preguntas = ParsearPreguntas(respuesta);
 
-        return contenido;
+                if (ValidarEstructuraPreguntas(preguntas))
+                {
+                    Log("✔ JSON ACEPTADO");
+                    LogJson("JSON ACEPTADO", respuesta);
+                    return preguntas;
+                }
+                else
+                {
+                    Log("❌ JSON DESCARTADO POR ESTRUCTURA");
+                    LogJson("JSON DESCARTADO (estructura inválida)", respuesta);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"❌ Error parseando JSON: {ex.Message}");
+                LogJson("JSON DESCARTADO (error parseo)", respuesta);
+            }
+
+            intentos++;
+            await Task.Delay(200);
+        }
+
+        throw new Exception("No se pudo obtener un JSON válido tras múltiples intentos.");
     }
 
-    private static List<Pregunta> ParsearPreguntas(string json)
+    // ============================================================
+    // 🔥 Parseo blindado con logs
+    // ============================================================
+    private static List<Pregunta> ParsearPreguntas(string raw)
     {
-        json = ExtraerSoloJSON(json);
-        json = RepararJsonIA(json);
+        LogJson("RAW COMPLETO", raw);
 
-        // Validación mínima
-        if (!json.Contains("\"preguntas\""))
-            throw new Exception("La IA no devolvió el campo 'preguntas'.");
+        string json = ExtraerJSONRobusto(raw);
+        LogJson("JSON EXTRAÍDO", json);
+
+        if (!EsJsonValido(json))
+        {
+            Log("⚠ JSON inválido, intentando reparación…");
+
+            string reparado = RepararJsonIA(json);
+            LogJson("JSON REPARADO", reparado);
+
+            if (!EsJsonValido(reparado))
+                throw new Exception("JSON inválido incluso tras reparación.");
+
+            json = reparado;
+        }
+
+        LogJson("JSON FINAL A DESERIALIZAR", json);
 
         var root = JsonConvert.DeserializeObject<RootPreguntas>(json);
 
@@ -166,95 +203,174 @@ DEVUELVE SOLO EL JSON.
 
         foreach (var p in root.preguntas)
         {
-            var opciones = new List<Opcion>();
+            var opciones = p.opciones
+                .Select(o => new Opcion(SanitizarTexto(o.texto), o.correcta))
+                .ToList();
 
-            foreach (var o in p.opciones)
-                opciones.Add(new Opcion(o.texto, o.correcta));
-
-            lista.Add(new Pregunta(p.enunciado, opciones));
+            lista.Add(new Pregunta(SanitizarTexto(p.enunciado), opciones));
         }
 
         return lista;
     }
 
+    // ============================================================
+    // 🔥 Extractor JSON robusto basado en stack
+    // ============================================================
+    private static string ExtraerJSONRobusto(string raw)
+    {
+        bool dentroString = false;
+        int nivel = 0;
+        int inicio = -1;
+
+        for (int i = 0; i < raw.Length; i++)
+        {
+            char c = raw[i];
+
+            if (c == '"' && (i == 0 || raw[i - 1] != '\\'))
+                dentroString = !dentroString;
+
+            if (!dentroString)
+            {
+                if (c == '{')
+                {
+                    if (nivel == 0)
+                        inicio = i;
+
+                    nivel++;
+                }
+                else if (c == '}')
+                {
+                    nivel--;
+
+                    if (nivel == 0 && inicio != -1)
+                        return raw.Substring(inicio, i - inicio + 1);
+                }
+            }
+        }
+
+        throw new Exception("No se pudo extraer un JSON válido.");
+    }
+
+    // ============================================================
+    // 🔥 Validación sintáctica
+    // ============================================================
+    private static bool EsJsonValido(string json)
+    {
+        try
+        {
+            JToken.Parse(json);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    // ============================================================
+    // 🔧 Reparación ligera
+    // ============================================================
     private static string RepararJsonIA(string json)
     {
-        if (string.IsNullOrWhiteSpace(json))
-            return json;
-
-        // 0. Eliminar comentarios y símbolos peligrosos
-        json = Regex.Replace(json, @"//.*?(?=\n|$)", ""); // comentarios //
-        json = Regex.Replace(json, @"/\*.*?\*/", "", RegexOptions.Singleline); // comentarios /* */
-        json = Regex.Replace(json, @"--?>", ""); // -->
-        json = Regex.Replace(json, @"=>", "");  // =>
-        json = Regex.Replace(json, @"->", "");  // ->
-        json = Regex.Replace(json, @"(?<![""'])>(?![""'])", ""); // > sueltos
-
-        // 1. Eliminar caracteres invisibles
         json = json.Replace("\r", "")
                    .Replace("\n", "")
                    .Replace("\t", "")
                    .Replace("\u00A0", " ")
                    .Replace("\u200B", "");
 
-        // 2. Asegurar claves entre comillas
         json = Regex.Replace(json, @"(?<={|,)\s*(\w+)\s*:", "\"$1\":");
 
-        // 3. Reemplazar comillas internas por comillas simples
-        json = Regex.Replace(json, "\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"", match =>
-        {
-            string contenido = match.Value;
-
-            if (Regex.IsMatch(contenido, "^\"[a-zA-Z0-9_]+\":$"))
-                return contenido;
-
-            string limpio = contenido.Substring(1, contenido.Length - 2)
-                                     .Replace("\"", "'");
-
-            return "\"" + limpio + "\"";
-        });
-
-        // 4. Arreglar objetos truncados
-        int openBraces = json.Count(c => c == '{');
-        int closeBraces = json.Count(c => c == '}');
-        while (closeBraces < openBraces)
-        {
-            json += "}";
-            closeBraces++;
-        }
-
-        // 5. Arreglar arrays truncados
-        int openBrackets = json.Count(c => c == '[');
-        int closeBrackets = json.Count(c => c == ']');
-        while (closeBrackets < openBrackets)
-        {
-            json += "]";
-            closeBrackets++;
-        }
-
-        // 6. Eliminar comas colgantes
         json = Regex.Replace(json, @",\s*([}\]])", "$1");
-
-        // 7. Reemplazar null por string vacío
-        json = json.Replace(": null", ": \"\"");
 
         return json;
     }
-}
 
-public class RootPreguntas
-{
-    public List<PreguntaIA> preguntas { get; set; }
-}
+    // ============================================================
+    // 🔥 Validación estructural completa
+    // ============================================================
+    private static bool ValidarEstructuraPreguntas(List<Pregunta> preguntas)
+    {
+        if (preguntas == null || preguntas.Count == 0)
+            return false;
 
-public class PreguntaIA
-{
-    public string enunciado { get; set; }
-    public List<OpcionIA> opciones { get; set; }
-}
+        foreach (var p in preguntas)
+        {
+            if (string.IsNullOrWhiteSpace(p.Enunciado))
+                return false;
 
-public class OpcionIA
-{
-    public string texto { get; set; }
-    public bool correcta { get; set; }
+            if (p.Opciones == null || p.Opciones.Count != 4)
+                return false;
+
+            if (p.Opciones.Count(o => o.EsCorrecta) != 1)
+                return false;
+
+            if (p.Opciones.Any(o => string.IsNullOrWhiteSpace(o.Texto)))
+                return false;
+        }
+
+        return true;
+    }
+
+    // ============================================================
+    // 🔧 Sanitización de texto
+    // ============================================================
+    private static string SanitizarTexto(string s)
+    {
+        if (s == null) return "";
+
+        s = s.Trim();
+        s = Regex.Replace(s, @"\s+", " ");
+        s = s.Replace("\u200B", "");
+        s = s.Replace("\u00A0", " ");
+        s = s.Replace("\"", "'");
+
+        return s;
+    }
+
+    // ============================================================
+    // 🔥 LOGGER
+    // ============================================================
+    private static void Log(string mensaje)
+    {
+        if (!DEBUG_LOG) return;
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"[AI-LOG] {mensaje}");
+        Console.ResetColor();
+    }
+
+    private static void LogJson(string titulo, string contenido)
+    {
+        if (!DEBUG_LOG) return;
+
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"\n===== {titulo} =====");
+        Console.ResetColor();
+
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine(contenido);
+        Console.ResetColor();
+
+        Console.WriteLine("============================\n");
+    }
+
+    // ============================================================
+    // 🔧 Clases auxiliares
+    // ============================================================
+    public class RootPreguntas
+    {
+        public List<PreguntaIA> preguntas { get; set; }
+    }
+
+    public class PreguntaIA
+    {
+        public string enunciado { get; set; }
+        public List<OpcionIA> opciones { get; set; }
+    }
+
+    public class OpcionIA
+    {
+        public string texto { get; set; }
+        public bool correcta { get; set; }
+    }
 }
