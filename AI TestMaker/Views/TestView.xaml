@@ -78,9 +78,9 @@
                         <ColumnDefinition Width="220"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel>
+                    <StackPanel VerticalAlignment="Center" >
                         <TextBlock Text="Información del Test" FontSize="20" FontWeight="Bold" Foreground="White"/>
-                        <TextBlock Text="{Binding Test.Tema, StringFormat=Tema: {0}}" Foreground="#B0C4DE" Margin="0,6,0,0"/>
+                        <TextBlock Text="{Binding Test.Tema, StringFormat=Tema: {0}}" Foreground="#B0C4DE" Margin="0,10,0,0"/>
                         <TextBlock Text="{Binding Test.Dificultad, StringFormat=Dificultad: {0}}" Foreground="#B0C4DE" Margin="0,2,0,0"/>
                         <TextBlock Text="{Binding Test.Fecha, StringFormat=Fecha: {0:dd/MM/yyyy HH:mm}}" Foreground="#B0C4DE" Margin="0,2,0,0"/>
                         <TextBlock Text="{Binding Test.TiempoMaximo, StringFormat=Tiempo máximo: {0}}" Foreground="#B0C4DE" Margin="0,2,0,0"/>
@@ -155,13 +155,12 @@
 
             <!-- Footer -->
             <StackPanel x:Name="FooterPanel" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,8,0,0">
-                <TextBlock x:Name="TxtProgreso" Foreground="#B0C4DE" Margin="0,0,12,0"/>
                 <Button Content="Finalizar Test" Style="{StaticResource PrimaryButton}" Click="Finalizar_Click"/>
             </StackPanel>
         </Grid>
 
         <!-- PauseOverlay como hermano de ContentGrid: queda por encima y NO recibe blur -->
-        <Grid x:Name="PauseOverlay" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Background="#80000000">
+        <Grid x:Name="PauseOverlay" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Background="#80000000" ToolTip="Terminar intento">
             <Border Width="420" Height="180" Background="#0F1724" CornerRadius="12" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
                     <TextBlock Text="Test en pausa" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>

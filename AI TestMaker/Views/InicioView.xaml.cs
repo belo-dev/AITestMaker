@@ -14,6 +14,8 @@ namespace AI_TestMaker.Views
 {
     public partial class InicioView : UserControl
     {
+        private bool _isInitialized = false;
+
         public InicioView()
         {
             InitializeComponent();
@@ -22,6 +24,7 @@ namespace AI_TestMaker.Views
             ZoomManager.ZoomChanged += OnZoomChanged;
 
             ConfigurarBotonSuperior();
+            _isInitialized = true;
         }
 
         private void ConfigurarBotonSuperior()
@@ -126,13 +129,38 @@ namespace AI_TestMaker.Views
                 return;
             }
 
+            // 🔥 VALIDACIÓN DEL NÚMERO PERSONALIZADO
+            string cantidadPersonalizada = "0";
+
+            if (dificultad == "Personalizado")
+            {
+                if (string.IsNullOrWhiteSpace(CustomNumberTextBox.Text))
+                {
+                    MessageBox.Show("Debes introducir un número de preguntas (1–200).", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                if (!int.TryParse(CustomNumberTextBox.Text, out int n) || n < 1 || n > 200)
+                {
+                    MessageBox.Show("El número de preguntas debe estar entre 1 y 200.", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                cantidadPersonalizada = n.ToString();
+            }
+
             TopicHistoryManager.AgregarTema(tema);
             CargarHistorial();
 
             var loading = new LoadingView();
             OverlayRoot.Children.Add(loading);
 
-            var preguntas = await AIQuestionGenerator.GenerarPreguntasIA(tema, dificultad, agente);
+            // 🔥 AHORA SE ENVÍA LA CANTIDAD PERSONALIZADA O 0
+            var preguntas = await AIQuestionGenerator.GenerarPreguntasIA(
+                tema, dificultad, cantidadPersonalizada, agente
+            );
 
             loading.FadeOutAndRemove();
 
@@ -144,6 +172,7 @@ namespace AI_TestMaker.Views
                 "Fácil" => TimeSpan.FromMinutes(25),
                 "Medio" => TimeSpan.FromMinutes(60),
                 "Difícil" => TimeSpan.FromMinutes(130),
+                "Personalizado" => TimeSpan.FromMinutes(int.Parse(cantidadPersonalizada)*0.8),
                 _ => TimeSpan.FromMinutes(25)
             };
 
@@ -157,6 +186,29 @@ namespace AI_TestMaker.Views
 
             this.BeginAnimation(OpacityProperty, fade);
         }
+
+
+        private void CustomNumberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.All(char.IsDigit);
+        }
+
+
+        private void DifficultyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isInitialized) return;
+            if (DifficultyComboBox.SelectedItem is ComboBoxItem item &&
+                item.Content.ToString() == "Personalizado")
+            {
+                CustomNumberTextBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CustomNumberTextBox.Visibility = Visibility.Collapsed;
+                CustomNumberTextBox.Text = string.Empty;
+            }
+        }
+
 
         private void HistorialComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -23,22 +23,42 @@ namespace AI_TestMaker.Views
 
         private void Registrarse_Click(object sender, RoutedEventArgs e)
         {
-            if (TxtPass.Password != TxtPass2.Password)
-            {
-                MessageBox.Show("Las contraseñas no coinciden");
-                return;
-            }
-
             string nombre = TxtNombre.Text.Trim();
             string usuario = TxtUser.Text.Trim();
             string pass = TxtPass.Password.Trim();
 
+            // Validación: nombre real obligatorio
             if (string.IsNullOrWhiteSpace(nombre))
             {
                 MessageBox.Show("Introduce tu nombre real.");
                 return;
             }
 
+            // Validación: email con regex
+            if (!System.Text.RegularExpressions.Regex.IsMatch(
+                usuario,
+                @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                MessageBox.Show("Introduce un correo electrónico válido.");
+                return;
+            }
+
+            // Validación: contraseña fuerte
+            if (!System.Text.RegularExpressions.Regex.IsMatch(
+                pass,
+                @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$"))
+            {
+                MessageBox.Show("La contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y un símbolo.");
+                return;
+            }
+
+            if (TxtPass.Password != TxtPass2.Password)
+            {
+                MessageBox.Show("Las contraseñas no coinciden");
+                return;
+            }
+
+            // Registrar usuario
             bool ok = _repo.Register(usuario, pass, nombre);
 
             if (!ok)
@@ -51,6 +71,7 @@ namespace AI_TestMaker.Views
 
             ((MainWindow)Application.Current.MainWindow).Content = new LoginView();
         }
+
 
 
         private void Volver_Click(object sender, RoutedEventArgs e)

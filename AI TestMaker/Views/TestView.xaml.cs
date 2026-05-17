@@ -59,7 +59,6 @@ namespace AI_TestMaker.Views
             TxtSub.Text = "Tiempo restante";
             UpdateProgressVisual(0);
             UpdateProgresoText();
-            TxtProgresoSide.Text = TxtProgreso.Text;
             PauseIcon.Visibility = Visibility.Visible;
             PlayIcon.Visibility = Visibility.Collapsed;
 
@@ -109,8 +108,7 @@ namespace AI_TestMaker.Views
         {
             int total = _test.Preguntas?.Count ?? 0;
             int respondidas = _test.Preguntas?.Count(p => p.RespuestaUsuario.HasValue) ?? 0;
-            TxtProgreso.Text = $"Respondidas: {respondidas}/{total}";
-            TxtProgresoSide.Text = TxtProgreso.Text;
+            TxtProgresoSide.Text = $"Respondidas: {respondidas}/{total}";
         }
 
         private void UpdateProgressVisual(double porcentaje)

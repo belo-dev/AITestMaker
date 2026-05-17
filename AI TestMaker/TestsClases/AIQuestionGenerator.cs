@@ -13,7 +13,7 @@ public static class AIQuestionGenerator
     private const bool DEBUG_LOG = true;
 
     public static async Task<List<Pregunta>> GenerarPreguntasIA(
-            string tema, string dificultad, string agenteSeleccionado)
+            string tema, string dificultad, string? cantidadPersonalizada, string agenteSeleccionado)
     {
         var agente = AgentManager.ObtenerAgente(agenteSeleccionado);
 
@@ -25,13 +25,19 @@ public static class AIQuestionGenerator
             "Fácil" => 20,
             "Medio" => 50,
             "Difícil" => 100,
+            "Personalizado" =>
+                int.TryParse(cantidadPersonalizada, out int n)
+                    ? Math.Clamp(n, 1, 200)
+                    : 20,
             _ => 20
         };
+
 
         int maxPorTanda = 5;
         var preguntasAcumuladas = new List<Pregunta>();
         var enunciadosPrevios = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
+        if (dificultad == "Personalizado")
+            dificultad = "Medio";
         int restantes = cantidad;
 
         while (restantes > 0)
