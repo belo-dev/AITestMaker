@@ -192,9 +192,9 @@
                                        HorizontalAlignment="Center"/>
 
                             <TextBlock Text="Nivel de dificultad"
-           FontSize="14"
-           Foreground="{StaticResource TextSecondary}"
-           Margin="0,10,0,4"/>
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextSecondary}"
+                                       Margin="0,10,0,4"/>
 
                             <Grid Width="300">
                                 <Grid.ColumnDefinitions>
@@ -291,16 +291,37 @@
                                        Foreground="White"
                                        FontSize="16"/>
 
-                            <ComboBox x:Name="IAComboBox"
-                                      Style="{StaticResource DarkComboBoxStyle}"
-                                      Width="300"
-                                      ToolTip="Selecciona tu modelo de IA">
-                                <ComboBoxItem Content="DeepSeek" ToolTip="Modelo Made in China"/>
-                                <ComboBoxItem Content="Groq" ToolTip="Elon Musk IA"/>
-                                <ComboBoxItem Content="Gemini" ToolTip="Google"/>
-                                <ComboBoxItem Content="OpenRouter" ToolTip="Prueba de open router"/>
-                                <ComboBoxItem Content="LMStudio" ToolTip="Server privado Belo-Dev"/>
-                            </ComboBox>
+                            <Grid Width="300">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- COMBOBOX IA -->
+                                <ComboBox x:Name="IAComboBox"
+                                          Style="{StaticResource DarkComboBoxStyle}"
+                                          Width="220"
+                                          ToolTip="Selecciona tu modelo de IA"
+                                          SelectionChanged="IAComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="DeepSeek"/>
+                                    <ComboBoxItem Content="Groq"/>
+                                    <ComboBoxItem Content="Gemini"/>
+                                    <ComboBoxItem Content="OpenRouter"/>
+                                    <ComboBoxItem x:Name="LMStudio" Content="LMStudio"/>
+                                </ComboBox>
+
+                                <!-- CHECKBOX OCULTO -->
+                                <CheckBox x:Name="LMStudioCheckBox"
+                                          Grid.Column="1"
+                                          Margin="10,0,0,0"
+                                          VerticalAlignment="Center"
+                                          Foreground="White"
+                                          Content="Quitar Censura"
+                                          Visibility="Hidden"
+                                          Checked="LMStudioCheckBox_Checked"
+                                          Unchecked="LMStudioCheckBox_Unchecked"/>
+                            </Grid>
+
 
                             <Button x:Name="StartTestButton"
                                     Content="Generar test"

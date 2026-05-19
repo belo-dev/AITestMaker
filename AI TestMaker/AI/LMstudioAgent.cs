@@ -31,7 +31,7 @@ public class LMStudioAgent : IAgent
             {
             new { role = "user", content = prompt }
         }
-        };
+    };
 
         string json = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
 

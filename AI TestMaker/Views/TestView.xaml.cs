@@ -347,10 +347,6 @@ namespace AI_TestMaker.Views
 
         private void FinalizarAutomaticamente()
         {
-            MessageBox.Show("El tiempo ha terminado. El test se ha finalizado automáticamente.",
-                            "Tiempo agotado",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information);
 
             ((MainWindow)Application.Current.MainWindow).Content =
                 new ResultadosView(_test);

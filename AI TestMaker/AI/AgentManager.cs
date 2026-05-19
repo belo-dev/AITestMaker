@@ -23,6 +23,7 @@ public static class AgentManager
             Agentes.Add(new DeepSeekAgentOpenRouter(openrouterKey));
 
         Agentes.Add(new LMStudioAgent());
+        Agentes.Add(new LMStudioAgentUncensored());
     }
 
     public static IAgent ObtenerAgente(string nombre)

@@ -232,6 +232,19 @@ namespace AI_TestMaker.Views
               new HistorialView();
         }
 
+        private void IAComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+{
+            if (IAComboBox.SelectedItem is ComboBoxItem item)
+            {
+                string selected = item.Content.ToString();
+
+                LMStudioCheckBox.Visibility =
+                    (selected == "LMStudio" || selected == "LMStudioUncensored")
+                    ? Visibility.Visible
+                    : Visibility.Hidden;
+            }
+        }
+
         private void MenuPerfil_Click(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).Content = new ProfileView();
@@ -272,6 +285,16 @@ namespace AI_TestMaker.Views
                 // Clic izquierdo en usuario registrado → abrir perfil
                 ((MainWindow)Application.Current.MainWindow).Content = new ProfileView();
             }
+        }
+
+        private void LMStudioCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            LMStudio.Content = "LMStudioUncensored";
+        }
+
+        private void LMStudioCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+           LMStudio.Content = "LMStudio";
         }
     }
 }

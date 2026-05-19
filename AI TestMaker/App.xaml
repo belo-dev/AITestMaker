@@ -9,6 +9,42 @@
                   ShadowDepth="0"
                   Color="#000000"
                   Opacity="0.45"/>
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
 
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Width="18" Height="18" Margin="0 0 8 0">
+
+                                <!-- Círculo exterior -->
+                                <Ellipse Stroke="White"
+                                 StrokeThickness="2"
+                                 Fill="Transparent"/>
+
+                                <!-- Círculo interior (aparece al seleccionar) -->
+                                <Ellipse x:Name="Inner"
+                                 Width="10" Height="10"
+                                 Fill="White"
+                                 Opacity="0"/>
+                            </Grid>
+
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Inner" Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
