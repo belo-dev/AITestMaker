@@ -21,7 +21,7 @@ AITestMaker is a Windows desktop application that creates multiple‑choice test
 -- WPF interface using MVVM
 
 *Installation
-Requirements: Windows 10+, Internet connection, 200 MB free space, .NET 8 Runtime.
+Requirements: Windows 10+, Internet connection and 200 MB free space.
 
 Steps:
 
