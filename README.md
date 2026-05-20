@@ -1,4 +1,5 @@
-AITestMaker -- AI‑powered test generator for Windows · DAM Final Project 2025/2026
+AITestMaker
+AI‑powered test generator for Windows · DAM Final Project 2025/2026
 
 AITestMaker is a Windows desktop application that creates multiple‑choice tests automatically using different AI models. You enter a topic, choose a difficulty level, and the app generates a complete test with questions and answers. It also stores your test history and allows exporting results to PDF.
 
