@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -11,12 +12,17 @@ namespace AI_TestMaker.DB.Login
 
         public UserRepository()
         {
-            string dbPath = System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "tests.db"
+            string folder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "AITestMaker"
             );
 
+            Directory.CreateDirectory(folder);
+
+            string dbPath = Path.Combine(folder, "tests.db");
+
             _connectionString = $"Data Source={dbPath};Version=3;";
+
         }
 
         private string HashPassword(string password, string salt)

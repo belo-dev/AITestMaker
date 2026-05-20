@@ -12,10 +12,14 @@ namespace AI_TestMaker.DB
 
         public DatabaseManager()
         {
-            string dbPath = System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "tests.db"
+            string folder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "AITestMaker"
             );
+
+            Directory.CreateDirectory(folder);
+
+            string dbPath = Path.Combine(folder, "tests.db");
 
             bool crearTablas = !File.Exists(dbPath);
 
@@ -24,6 +28,7 @@ namespace AI_TestMaker.DB
             if (crearTablas)
                 CrearTablas();
         }
+
 
 
         public void CrearTablas()

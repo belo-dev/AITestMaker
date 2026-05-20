@@ -3,6 +3,33 @@
   "WorkspaceRootPath": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\",
   "Documents": [
     {
+<<<<<<< Updated upstream
+=======
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\db-login\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\db-login\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\db-login\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\db-login\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\ai\\lmstudioagentuncensored.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\ai\\lmstudioagentuncensored.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\ai\\lmstudioagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\ai\\lmstudioagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\views\\preguntacontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\views\\preguntacontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+>>>>>>> Stashed changes
       "AbsoluteMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|d:\\visualstudio\\programaci\u00F3n\\c#\\aitestmaker\\ai testmaker\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{96DAA40D-8EFF-4679-B492-2B03417AAC25}|AI TestMaker\\AI TestMaker.csproj|solutionrelative:ai testmaker\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -39,6 +66,72 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< Updated upstream
+=======
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\DB-Login\\UserRepository.cs",
+              "RelativeDocumentMoniker": "AI TestMaker\\DB-Login\\UserRepository.cs",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\DB-Login\\UserRepository.cs",
+              "RelativeToolTip": "AI TestMaker\\DB-Login\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T17:10:06.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginView.xaml.cs",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\LoginView.xaml.cs",
+              "RelativeDocumentMoniker": "AI TestMaker\\Views\\LoginView.xaml.cs",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\LoginView.xaml.cs",
+              "RelativeToolTip": "AI TestMaker\\Views\\LoginView.xaml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T17:09:48.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DatabaseManager.cs",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\DB-Login\\DatabaseManager.cs",
+              "RelativeDocumentMoniker": "AI TestMaker\\DB-Login\\DatabaseManager.cs",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\DB-Login\\DatabaseManager.cs",
+              "RelativeToolTip": "AI TestMaker\\DB-Login\\DatabaseManager.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T16:38:46.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LMstudioAgentUncensored.cs",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\AI\\LMstudioAgentUncensored.cs",
+              "RelativeDocumentMoniker": "AI TestMaker\\AI\\LMstudioAgentUncensored.cs",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\AI\\LMstudioAgentUncensored.cs",
+              "RelativeToolTip": "AI TestMaker\\AI\\LMstudioAgentUncensored.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAADwvx8AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T08:35:14.772Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LMstudioAgent.cs",
+              "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\AI\\LMstudioAgent.cs",
+              "RelativeDocumentMoniker": "AI TestMaker\\AI\\LMstudioAgent.cs",
+              "ToolTip": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\AI\\LMstudioAgent.cs",
+              "RelativeToolTip": "AI TestMaker\\AI\\LMstudioAgent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T08:34:52.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+>>>>>>> Stashed changes
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\App.xaml",
               "RelativeDocumentMoniker": "AI TestMaker\\App.xaml",
@@ -50,7 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "PreguntaControl.xaml.cs",
               "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\PreguntaControl.xaml.cs",
               "RelativeDocumentMoniker": "AI TestMaker\\Views\\PreguntaControl.xaml.cs",
@@ -63,7 +156,11 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 1,
+=======
+              "DocumentIndex": 7,
+>>>>>>> Stashed changes
               "Title": "PreguntaControl.xaml",
               "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\PreguntaControl.xaml",
               "RelativeDocumentMoniker": "AI TestMaker\\Views\\PreguntaControl.xaml",
@@ -75,7 +172,11 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 4,
+=======
+              "DocumentIndex": 9,
+>>>>>>> Stashed changes
               "Title": "TestView.xaml.cs",
               "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\TestView.xaml.cs",
               "RelativeDocumentMoniker": "AI TestMaker\\Views\\TestView.xaml.cs",
@@ -88,7 +189,11 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 3,
+=======
+              "DocumentIndex": 8,
+>>>>>>> Stashed changes
               "Title": "TestView.xaml",
               "DocumentMoniker": "D:\\VisualStudio\\Programaci\u00F3n\\C#\\AITestMaker\\AI TestMaker\\Views\\TestView.xaml",
               "RelativeDocumentMoniker": "AI TestMaker\\Views\\TestView.xaml",

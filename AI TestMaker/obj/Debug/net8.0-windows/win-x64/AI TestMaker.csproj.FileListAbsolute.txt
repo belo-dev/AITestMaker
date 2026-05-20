@@ -481,7 +481,10 @@ D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windo
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\PreguntaControl.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\RegisterView.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\ResultadosView.baml
+<<<<<<< Updated upstream
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\TestView.baml
+=======
+>>>>>>> Stashed changes
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\MainWindow.g.cs
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\CambiarPassWindow.g.cs
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\HistorialView.g.cs
@@ -499,6 +502,10 @@ D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windo
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\AI TestMaker_MarkupCompile.lref
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\App.baml
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\ProfileView.baml
+<<<<<<< Updated upstream
+=======
+D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\Views\TestView.baml
+>>>>>>> Stashed changes
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\AI TestMaker.g.resources
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\AI TestMaker.GeneratedMSBuildEditorConfig.editorconfig
 D:\VisualStudio\Programación\C#\AITestMaker\AI TestMaker\obj\Debug\net8.0-windows\win-x64\AI TestMaker.AssemblyInfoInputs.cache

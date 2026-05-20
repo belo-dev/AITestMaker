@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AI TestMaker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+afcb3734244df5ecce70bcc4d69ff67074cce5c5")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a02631ddab043b9731ba3a7efe484c7dfcbecca")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("AI TestMaker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AI TestMaker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
